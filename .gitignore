@@ -1,7 +1,5 @@
 *.dcu
 *.*~
-*.exe
-*.apk
 *.so
 
 *.zip
