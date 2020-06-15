@@ -18,7 +18,6 @@ type
     Panel1: TPanel;
     EditPapel: TEdit;
     ComboBoxPapel: TComboBox;
-    ImageList1: TImageList;
     StringGrid1: TStringGrid;
     BindSourceDB1: TBindSourceDB;
     BindingsList1: TBindingsList;
@@ -32,7 +31,6 @@ type
     EditPLFinal: TEdit;
     Label3: TLabel;
     Label4: TLabel;
-    btnFiltrar: TButton;
     Label5: TLabel;
     EditPercentualDividendo: TEdit;
     Label6: TLabel;
@@ -53,15 +51,16 @@ type
     GroupBox1: TGroupBox;
     Label9: TLabel;
     EditDividendYield: TEdit;
+    SpeedButton1: TSpeedButton;
     procedure FormShow(Sender: TObject);
     procedure StringGrid1DrawColumnCell(Sender: TObject; const Canvas: TCanvas; const Column: TColumn; const Bounds: TRectF;
       const Row: Integer; const Value: TValue; const State: TGridDrawStates);
     procedure ComboBoxColunaChange(Sender: TObject);
-    procedure btnFiltrarClick(Sender: TObject);
     procedure Button1Click(Sender: TObject);
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
     procedure btnAtualizarClick(Sender: TObject);
     procedure btnCloseClick(Sender: TObject);
+    procedure SpeedButton1Click(Sender: TObject);
   private
 
     pvFiltroFinal: string;
@@ -343,6 +342,30 @@ begin
 
 end;
 
+procedure TFormDividendos.SpeedButton1Click(Sender: TObject);
+begin
+  DataModule.FDQueryPapelCadastro.CLOSE;
+  DataModule.FDQueryPapelCadastro.ParamByName('descricao').AsString := '';
+
+  if NOT EditPapel.Text.IsEmpty then
+    pvFiltroFinal := format(' and (DESCRICAO like ''%s%s%s'' )', ['%', EditPapel.Text, '%'])
+  else
+  begin
+    pvFiltroFinal := format(' and (pl >= %s and pl <= %s)', [EditPLInicial.Text, EditPLFinal.Text]);
+    pvFiltroFinal := pvFiltroFinal + format(' and (DIVID_EX_ANTERIOR_PRC >= %s )', [EditPercentualDividendo.Text]);
+    pvFiltroFinal := pvFiltroFinal + format(' and (DIVIDA_LIQUIDA_EBITIDA <= %s )', [EditDividaLiquidaEbitida.Text]);
+    pvFiltroFinal := pvFiltroFinal + format(' and (TAG_ALONG >= %s )', [EditTagAlong.Text]);
+    pvFiltroFinal := pvFiltroFinal + format(' and (DIVIDEND_YIELD >= %s )', [EditDividendYield.Text]);
+    pvFiltroFinal := pvFiltroFinal + format(' and (VALOR_BETA >= %s AND VALOR_BETA <= %s )',
+      [EditBetaInicial.Text, EditBetaFinal.Text]);
+
+  end;
+
+  DataModule.FDQueryPapelCadastro.SQL.Text := format(sql_default_papel_cadastro, [pvFiltroFinal, pvOrderByFinal]);
+  DataModule.FDQueryPapelCadastro.Open;
+
+end;
+
 procedure TFormDividendos.StringGrid1DrawColumnCell(Sender: TObject; const Canvas: TCanvas; const Column: TColumn;
   const Bounds: TRectF; const Row: Integer; const Value: TValue; const State: TGridDrawStates);
 var
@@ -395,29 +418,6 @@ end;
 procedure TFormDividendos.btnCloseClick(Sender: TObject);
 begin
   close;
-end;
-
-procedure TFormDividendos.btnFiltrarClick(Sender: TObject);
-begin
-  DataModule.FDQueryPapelCadastro.CLOSE;
-  DataModule.FDQueryPapelCadastro.ParamByName('descricao').AsString := '';
-
-  if NOT EditPapel.Text.IsEmpty then
-    pvFiltroFinal := format(' and (DESCRICAO like ''%s%s%s'' )', ['%', EditPapel.Text, '%'])
-  else
-  begin
-    pvFiltroFinal := format(' and (pl >= %s and pl <= %s)', [EditPLInicial.Text, EditPLFinal.Text]);
-    pvFiltroFinal := pvFiltroFinal + format(' and (DIVID_EX_ANTERIOR_PRC >= %s )', [EditPercentualDividendo.Text]);
-    pvFiltroFinal := pvFiltroFinal + format(' and (DIVIDA_LIQUIDA_EBITIDA <= %s )', [EditDividaLiquidaEbitida.Text]);
-    pvFiltroFinal := pvFiltroFinal + format(' and (TAG_ALONG >= %s )', [EditTagAlong.Text]);
-    pvFiltroFinal := pvFiltroFinal + format(' and (DIVIDEND_YIELD >= %s )', [EditDividendYield.Text]);
-    pvFiltroFinal := pvFiltroFinal + format(' and (VALOR_BETA >= %s AND VALOR_BETA <= %s )',
-      [EditBetaInicial.Text, EditBetaFinal.Text]);
-
-  end;
-
-  DataModule.FDQueryPapelCadastro.SQL.Text := format(sql_default_papel_cadastro, [pvFiltroFinal, pvOrderByFinal]);
-  DataModule.FDQueryPapelCadastro.Open;
 end;
 
 end.
