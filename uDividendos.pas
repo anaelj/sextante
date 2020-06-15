@@ -47,7 +47,12 @@ type
     Label8: TLabel;
     btnAtualizar: TSpeedButton;
     StyleBook1: TStyleBook;
-    Button2: TButton;
+    Panel2: TPanel;
+    Panel3: TPanel;
+    btnClose: TSpeedButton;
+    GroupBox1: TGroupBox;
+    Label9: TLabel;
+    EditDividendYield: TEdit;
     procedure FormShow(Sender: TObject);
     procedure StringGrid1DrawColumnCell(Sender: TObject; const Canvas: TCanvas; const Column: TColumn; const Bounds: TRectF;
       const Row: Integer; const Value: TValue; const State: TGridDrawStates);
@@ -56,7 +61,7 @@ type
     procedure Button1Click(Sender: TObject);
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
     procedure btnAtualizarClick(Sender: TObject);
-    procedure Button2Click(Sender: TObject);
+    procedure btnCloseClick(Sender: TObject);
   private
 
     pvFiltroFinal: string;
@@ -178,11 +183,6 @@ begin
   DataModule.FDQueryPapelCadastro.CLOSE;;
   DataModule.FDQueryPapelLista.CLOSE;
   DataModule.FDQueryPapelCadastro.Open;
-end;
-
-procedure TFormDividendos.Button2Click(Sender: TObject);
-begin
-  DataModule.Show;
 end;
 
 procedure TFormDividendos.cargaBeta;
@@ -392,6 +392,11 @@ begin
   FormPopup.Show;
 end;
 
+procedure TFormDividendos.btnCloseClick(Sender: TObject);
+begin
+  close;
+end;
+
 procedure TFormDividendos.btnFiltrarClick(Sender: TObject);
 begin
   DataModule.FDQueryPapelCadastro.CLOSE;
@@ -405,6 +410,7 @@ begin
     pvFiltroFinal := pvFiltroFinal + format(' and (DIVID_EX_ANTERIOR_PRC >= %s )', [EditPercentualDividendo.Text]);
     pvFiltroFinal := pvFiltroFinal + format(' and (DIVIDA_LIQUIDA_EBITIDA <= %s )', [EditDividaLiquidaEbitida.Text]);
     pvFiltroFinal := pvFiltroFinal + format(' and (TAG_ALONG >= %s )', [EditTagAlong.Text]);
+    pvFiltroFinal := pvFiltroFinal + format(' and (DIVIDEND_YIELD >= %s )', [EditDividendYield.Text]);
     pvFiltroFinal := pvFiltroFinal + format(' and (VALOR_BETA >= %s AND VALOR_BETA <= %s )',
       [EditBetaInicial.Text, EditBetaFinal.Text]);
 
