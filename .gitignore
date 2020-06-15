@@ -1,0 +1,9 @@
+*.dcu
+*.*~
+*.exe
+*.apk
+*.so
+
+*.zip
+Sextante.dproj
+Sextante.dproj.local
