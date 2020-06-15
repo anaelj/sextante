@@ -16,6 +16,8 @@ type
     btnBeta: TSpeedButton;
     btnClose: TSpeedButton;
     StyleBook1: TStyleBook;
+    Panel1: TPanel;
+    Rectangle2: TRectangle;
     procedure btnPLDividaLiquidaClick(Sender: TObject);
     procedure btnBetaClick(Sender: TObject);
     procedure btnCotacaoClick(Sender: TObject);
