@@ -26,8 +26,8 @@ object FormPrincipal: TFormPrincipal
     Size.Height = 340.000000000000000000
     Size.PlatformDefault = False
     TabOrder = 1
-    Viewport.Width = 666.000000000000000000
-    Viewport.Height = 340.000000000000000000
+    Viewport.Width = 662.000000000000000000
+    Viewport.Height = 315.000000000000000000
   end
   object PanelFiltros: TPanel
     Align = Top

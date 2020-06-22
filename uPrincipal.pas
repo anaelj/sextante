@@ -232,7 +232,7 @@ begin
             queryLocal.FieldByName('COTACAO_ATUAL').Value * 100;
         queryLocal.Post;
   //      queryLocal.Transaction.Commit;
-        sleep(10);
+        sleep(11);
       end;
       queryLocal.Next;
     end;
