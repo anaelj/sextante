@@ -2,7 +2,7 @@ object FormPopup: TFormPopup
   Left = 0
   Top = 0
   BorderStyle = None
-  ClientHeight = 497
+  ClientHeight = 471
   ClientWidth = 452
   Position = OwnerFormCenter
   StyleBook = StyleBook1
@@ -11,6 +11,8 @@ object FormPopup: TFormPopup
   FormFactor.Width = 320
   FormFactor.Height = 480
   FormFactor.Devices = [Desktop]
+  FullScreen = True
+  OnCreate = FormCreate
   DesignerMasterStyle = 0
   object StyleBook1: TStyleBook
     Styles = <
@@ -131,7 +133,7 @@ object FormPopup: TFormPopup
     Align = Client
     Opacity = 0.800000011920929000
     Size.Width = 452.000000000000000000
-    Size.Height = 497.000000000000000000
+    Size.Height = 471.000000000000000000
     Size.PlatformDefault = False
     TabOrder = 1
     object Rectangle1: TRectangle
@@ -143,21 +145,20 @@ object FormPopup: TFormPopup
       Margins.Right = 30.000000000000000000
       Margins.Bottom = 30.000000000000000000
       Size.Width = 392.000000000000000000
-      Size.Height = 437.000000000000000000
+      Size.Height = 378.000000000000000000
       Size.PlatformDefault = False
       Stroke.Kind = Resource
       object btnPLDividaLiquida: TSpeedButton
         Align = Top
         StyledSettings = [Family, Style, FontColor]
-        Images = DataModule.ImageList1
         ImageIndex = 3
         Margins.Left = 20.000000000000000000
-        Margins.Top = 20.000000000000000000
+        Margins.Top = 50.000000000000000000
         Margins.Right = 20.000000000000000000
         Position.X = 20.000000000000000000
-        Position.Y = 70.000000000000000000
+        Position.Y = 50.000000000000000000
         Size.Width = 352.000000000000000000
-        Size.Height = 50.000000000000000000
+        Size.Height = 40.000000000000000000
         Size.PlatformDefault = False
         StyleLookup = 'SpeedButtonPersonalizado'
         Text = '   P/L, D'#237'v. l'#237'quida/EBITDA e Dividend Yield'
@@ -168,15 +169,14 @@ object FormPopup: TFormPopup
       object btnCotacao: TSpeedButton
         Align = Top
         StyledSettings = [Family, Style, FontColor]
-        Images = DataModule.ImageList1
         ImageIndex = 3
         Margins.Left = 20.000000000000000000
         Margins.Top = 20.000000000000000000
         Margins.Right = 20.000000000000000000
         Position.X = 20.000000000000000000
-        Position.Y = 210.000000000000000000
+        Position.Y = 170.000000000000000000
         Size.Width = 352.000000000000000000
-        Size.Height = 50.000000000000000000
+        Size.Height = 40.000000000000000000
         Size.PlatformDefault = False
         StyleLookup = 'SpeedButtonPersonalizado'
         Text = '   Cota'#231#227'o'
@@ -187,34 +187,33 @@ object FormPopup: TFormPopup
       object btnTodos: TSpeedButton
         Align = Top
         StyledSettings = [Family, Style, FontColor]
-        Images = DataModule.ImageList1
         ImageIndex = 3
         Margins.Left = 20.000000000000000000
         Margins.Top = 20.000000000000000000
         Margins.Right = 20.000000000000000000
         Position.X = 20.000000000000000000
-        Position.Y = 350.000000000000000000
+        Position.Y = 290.000000000000000000
         Size.Width = 352.000000000000000000
-        Size.Height = 50.000000000000000000
+        Size.Height = 40.000000000000000000
         Size.PlatformDefault = False
         StyleLookup = 'SpeedButtonPersonalizado'
         Text = '   Todos'
         TextSettings.Font.Size = 16.000000000000000000
         TextSettings.HorzAlign = Leading
+        Visible = False
         OnClick = btnTodosClick
       end
       object btnDividendos: TSpeedButton
         Align = Top
         StyledSettings = [Family, Style, FontColor]
-        Images = DataModule.ImageList1
         ImageIndex = 3
         Margins.Left = 20.000000000000000000
         Margins.Top = 20.000000000000000000
         Margins.Right = 20.000000000000000000
         Position.X = 20.000000000000000000
-        Position.Y = 280.000000000000000000
+        Position.Y = 230.000000000000000000
         Size.Width = 352.000000000000000000
-        Size.Height = 50.000000000000000000
+        Size.Height = 40.000000000000000000
         Size.PlatformDefault = False
         StyleLookup = 'SpeedButtonPersonalizado'
         Text = '   Dividendos'
@@ -225,15 +224,14 @@ object FormPopup: TFormPopup
       object btnBeta: TSpeedButton
         Align = Top
         StyledSettings = [Family, Style, FontColor]
-        Images = DataModule.ImageList1
         ImageIndex = 3
         Margins.Left = 20.000000000000000000
         Margins.Top = 20.000000000000000000
         Margins.Right = 20.000000000000000000
         Position.X = 20.000000000000000000
-        Position.Y = 140.000000000000000000
+        Position.Y = 110.000000000000000000
         Size.Width = 352.000000000000000000
-        Size.Height = 50.000000000000000000
+        Size.Height = 40.000000000000000000
         Size.PlatformDefault = False
         StyleLookup = 'SpeedButtonPersonalizado'
         Text = '   Beta'
@@ -242,18 +240,17 @@ object FormPopup: TFormPopup
         OnClick = btnBetaClick
       end
       object Rectangle2: TRectangle
-        Align = Top
         Fill.Color = claWhite
-        Size.Width = 392.000000000000000000
+        Position.X = 344.000000000000000000
+        Size.Width = 48.000000000000000000
         Size.Height = 50.000000000000000000
         Size.PlatformDefault = False
         Stroke.Kind = Resource
         object btnClose: TSpeedButton
           Align = Right
-          Images = DataModule.ImageList1
           ImageIndex = 4
           Margins.Right = 10.000000000000000000
-          Position.X = 326.000000000000000000
+          Position.X = -18.000000000000000000
           Size.Width = 56.000000000000000000
           Size.Height = 50.000000000000000000
           Size.PlatformDefault = False

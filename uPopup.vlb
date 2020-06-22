@@ -1,6 +1,3 @@
-﻿[DataModule.FDQueryPapel]
-Visible=False
-
-[DataModule.FDQueryPapelCadastro]
+﻿[DataModule.FDQueryPapelGrid]
 Visible=False
 

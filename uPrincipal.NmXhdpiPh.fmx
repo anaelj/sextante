@@ -1,0 +1,45 @@
+inherited FormPrincipal_NmXhdpiPh: TFormPrincipal_NmXhdpiPh
+  ClientHeight = 615
+  ClientWidth = 400
+  DesignerMasterStyle = 3
+  inherited StringGrid1: TStringGrid
+    Size.Width = 370.000000000000000000
+    Size.Height = 355.000000000000000000
+    Viewport.Width = 370.000000000000000000
+    Viewport.Height = 355.000000000000000000
+  end
+  inherited PanelFiltros: TPanel
+    Size.Width = 370.000000000000000000
+    inherited GroupBox1: TGroupBox
+      Size.Width = 370.000000000000000000
+      inherited SpeedButton3: TSpeedButton
+        TextSettings.Font.StyleExt = {00070000000000000004000000}
+      end
+    end
+  end
+  inherited PanelToolBar: TPanel
+    Size.Width = 370.000000000000000000
+    inherited SpeedButton2: TSpeedButton
+      Position.Y = 8.000000000000000000
+      Size.Height = 48.000000000000000000
+      TextSettings.Font.StyleExt = {00070000000000000004000000}
+    end
+    inherited btnAtualizar: TSpeedButton
+      Position.Y = 8.000000000000000000
+      Size.Height = 48.000000000000000000
+      TextSettings.Font.StyleExt = {00070000000000000004000000}
+    end
+    inherited SpeedButton4: TSpeedButton
+      Position.X = 319.000000000000000000
+    end
+    inherited btnFiltrar: TSpeedButton
+      Position.Y = 8.000000000000000000
+      Size.Height = 48.000000000000000000
+      TextSettings.Font.StyleExt = {00070000000000000004000000}
+    end
+  end
+  inherited Label1: TLabel
+    Position.Y = 598.000000000000000000
+    Size.Width = 400.000000000000000000
+  end
+end

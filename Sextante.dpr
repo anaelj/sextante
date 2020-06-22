@@ -3,17 +3,21 @@ program Sextante;
 uses
   System.StartUpCopy,
   FMX.Forms,
-  uDividendos in 'uDividendos.pas' {FormDividendos},
+  uPrincipal in 'uPrincipal.pas' {FormPrincipal},
   uDataModule in 'uDataModule.pas' {DataModule},
   uPopup in 'uPopup.pas' {FormPopup},
-  Loading in '..\comum\Loading.pas';
+  Loading in '..\comum\Loading.pas',
+  uFindInHtml in '..\comum\uFindInHtml.pas';
 
 {$R *.res}
 
 begin
   Application.Initialize;
+  Application.FormFactor.Orientations := [TFormOrientation.Landscape];
+  Application.CreateForm(TFormPrincipal, FormPrincipal);
   Application.CreateForm(TDataModule, DataModule);
-  Application.CreateForm(TFormDividendos, FormDividendos);
+  Application.CreateForm(TFormPopup, FormPopup);
   Application.CreateForm(TFormPopup, FormPopup);
   Application.Run;
 end.
+

@@ -3,7 +3,7 @@ unit uPopup;
 interface
 
 uses
-  System.SysUtils, System.Types, System.UITypes, System.Classes, System.Variants,
+  System.SysUtils, System.Types, System.UITypes, System.Classes, System.Variants, syncObjs,
   FMX.Types, FMX.Controls, FMX.Forms, FMX.Graphics, FMX.Dialogs, FMX.Objects, FMX.Controls.Presentation, FMX.StdCtrls;
 
 type
@@ -24,8 +24,11 @@ type
     procedure btnDividendosClick(Sender: TObject);
     procedure btnTodosClick(Sender: TObject);
     procedure btnCloseClick(Sender: TObject);
+    procedure FormCreate(Sender: TObject);
   private
     { Private declarations }
+    fCS: TCriticalSection;
+
   public
     { Public declarations }
   end;
@@ -38,26 +41,23 @@ implementation
 {$R *.fmx}
 
 
-uses uDataModule, uDividendos, Loading;
+uses uDataModule, Loading, uPrincipal;
 
 procedure TFormPopup.btnPLDividaLiquidaClick(Sender: TObject);
 begin
-
-  TLoading.Show(FormDividendos, 'Buscando dados...');
-
+  TLoading.Show(FormPrincipal, 'Buscando dados...');
+  FormPrincipal.StringGrid1.Visible := false;
   TThread.CreateAnonymousThread(
     procedure
     begin
-      FormDividendos.cargaPLeDividaLiquida;
-
+      FormPrincipal.cargaPLeDividaLiquida;
       TThread.Synchronize(nil,
         procedure
         begin
           TLoading.Hide;
+          FormPrincipal.StringGrid1.Visible := true;
         end);
-
     end).Start;
-
   close;
 end;
 
@@ -68,13 +68,14 @@ end;
 
 procedure TFormPopup.btnCotacaoClick(Sender: TObject);
 begin
-  TLoading.Show(FormDividendos, 'Buscando dados...');
+  TLoading.Show(FormPrincipal, 'Buscando dados...');
+  FormPrincipal.StringGrid1.Visible := false;
 
   TThread.CreateAnonymousThread(
     procedure
     begin
       try
-        FormDividendos.AtualizaPapeis;
+        FormPrincipal.cargaCotacao;
       except
       end;
 
@@ -82,68 +83,85 @@ begin
         procedure
         begin
           TLoading.Hide;
+          FormPrincipal.StringGrid1.Visible := true;
         end);
 
     end).Start;
   close;
+
 end;
 
 procedure TFormPopup.btnTodosClick(Sender: TObject);
 begin
-  TLoading.Show(FormDividendos, 'Buscando dados...');
+  close;
+
+  TLoading.Show(FormPrincipal, 'Buscando dados...');
 
   TThread.CreateAnonymousThread(
     procedure
     begin
-      FormDividendos.AtualizaPapeis;
-      FormDividendos.cargaInicialDividendos;
-      FormDividendos.cargaBeta;
-      FormDividendos.cargaPLeDividaLiquida;
-      DataModule.FDQueryPapelCadastro.Open;
+      FormPrincipal.cargaCotacao;
+      FormPrincipal.cargaInicialDividendos;
+      FormPrincipal.cargaBeta;
+      FormPrincipal.cargaPLeDividaLiquida;
 
       TThread.Synchronize(nil,
         procedure
         begin
           TLoading.Hide;
         end);
-
     end).Start;
-  close;
+
+  // fCS.Enter;
+  // TThread.CreateAnonymousThread(FormPrincipal.cargaCotacao).Start;
+  // fCS.Leave;
+  // fCS.Enter;
+  // TThread.CreateAnonymousThread(FormPrincipal.cargaInicialDividendos).Start;
+  // fCS.Leave;
+  // TThread.CreateAnonymousThread(FormPrincipal.cargaBeta).start;
+  // TThread.CreateAnonymousThread(FormPrincipal.cargaPLeDividaLiquida).Start;
+
+end;
+
+procedure TFormPopup.FormCreate(Sender: TObject);
+begin
+  fCS := TCriticalSection.Create;
 
 end;
 
 procedure TFormPopup.btnDividendosClick(Sender: TObject);
 begin
-  TLoading.Show(FormDividendos, 'Buscando dados...');
-
+  TLoading.Show(FormPrincipal, 'Buscando dados...');
+  FormPrincipal.StringGrid1.Visible := false;
   TThread.CreateAnonymousThread(
     procedure
     begin
-      FormDividendos.cargaInicialDividendos;
-
+      FormPrincipal.cargaInicialDividendos;
       TThread.Synchronize(nil,
         procedure
         begin
           TLoading.Hide;
+          FormPrincipal.StringGrid1.Visible := true;
         end);
-
     end).Start;
   close;
 end;
 
 procedure TFormPopup.btnBetaClick(Sender: TObject);
 begin
-  TLoading.Show(FormDividendos, 'Buscando dados...');
+  TLoading.Show(FormPrincipal, 'Buscando dados...');
+  FormPrincipal.StringGrid1.Visible := false;
 
   TThread.CreateAnonymousThread(
     procedure
     begin
-      FormDividendos.cargaBeta;
+      FormPrincipal.cargaBeta;
 
       TThread.Synchronize(nil,
         procedure
         begin
           TLoading.Hide;
+          FormPrincipal.StringGrid1.Visible := true;
         end);
 
     end).Start;
