@@ -79,8 +79,7 @@ const
   url_yahoo = 'https://finance.yahoo.com/quote/%s.SA/';
 
   regExCotacaoYahoo = 'Trsdu.*?\<\/';
-//  regExStatusInvest = '%s.+?\d\<\/';
-  regExStatusInvest = '%s.+?\d\s*\%*\<\/';
+  regExStatusInvest = '%s.+?\d\<\/';
 
 implementation
 
