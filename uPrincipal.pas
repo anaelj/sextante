@@ -43,18 +43,19 @@ type
     ComboBoxColuna: TComboBox;
     SpeedButton2: TSpeedButton;
     PanelToolBar: TPanel;
-    SpeedButton3: TSpeedButton;
+    btnFiltrar: TSpeedButton;
     SpeedButton4: TSpeedButton;
     StyleBook1: TStyleBook;
-    btnFiltrar: TSpeedButton;
+    btnFiltros: TSpeedButton;
     Label1: TLabel;
     procedure FormShow(Sender: TObject);
     procedure SpeedButton1Click(Sender: TObject);
     procedure btnCloseClick(Sender: TObject);
-    procedure SpeedButton3Click(Sender: TObject);
     procedure btnFiltrarClick(Sender: TObject);
+    procedure btnFiltrosClick(Sender: TObject);
     procedure btnAtualizarClick(Sender: TObject);
     procedure FormCreate(Sender: TObject);
+    procedure SpeedButton2Click(Sender: TObject);
   private
     { Private declarations }
     pvFiltroFinal: string;
@@ -63,14 +64,15 @@ type
 
     function buscaValor(pExercicio: string; pTexto: string): variant;
     class function criaLabel(const pTop: integer; pParent: TForm): TLabel; static;
+    function retornaConsultaSql(const pColunas: string = ''; const pPapel: string = ''): string;
     // function buscaValorGeneric(pExpReg, pTexto: string): variant;
 
   public
     { Public declarations }
-    procedure cargaCotacao;
-    procedure cargaInicialDividendos;
-    procedure cargaBeta;
-    procedure cargaPLeDividaLiquida;
+    procedure cargaCotacao(const pPapel: string = '');
+    procedure cargaInicialDividendos(const pPapel: string = '');
+    procedure cargaBeta(const pPapel: string = '');
+    procedure cargaPLeDividaLiquida(const pPapel: string = '');
   end;
 
 var
@@ -83,7 +85,7 @@ implementation
 {$R *.NmXhdpiPh.fmx ANDROID}
 
 
-uses uDataModule, uPopup, Loading, uFindInHtml;
+uses uDataModule, uPopup, Loading, uFindInHtml, addPapel;
 
 procedure TFormPrincipal.btnAtualizarClick(Sender: TObject);
 begin
@@ -95,7 +97,7 @@ begin
   CLOSE;
 end;
 
-procedure TFormPrincipal.btnFiltrarClick(Sender: TObject);
+procedure TFormPrincipal.btnFiltrosClick(Sender: TObject);
 begin
   PanelFiltros.Visible := True;
   PanelToolBar.Visible := False;
@@ -124,7 +126,7 @@ begin
   Result := valorTotal;
 end;
 
-procedure TFormPrincipal.cargaBeta;
+procedure TFormPrincipal.cargaBeta(const pPapel: string = '');
 var
   queryLocal: TFDQuery;
   htmlRetorno: TStrings;
@@ -134,8 +136,9 @@ begin
     fCS.Enter;
     queryLocal := TFDQuery.Create(self);
     queryLocal.Connection := DataModule.FDConnection1;
-//    queryLocal.Transaction := DataModule.FDTransactionPrincipal;
-    queryLocal.SQL.Add(format(cns_sql_papel_field, ['ID,VALOR_BETA,URL_BETA']));
+
+    queryLocal.SQL.Add(retornaConsultaSql('ID,VALOR_BETA,URL_BETA', pPapel));
+
     queryLocal.Open;
 
     labelLocal := criaLabel(90, FormPrincipal);
@@ -152,11 +155,9 @@ begin
 
         if htmlRetorno.Text.Contains('Beta') then
         begin
-//          queryLocal.Transaction.StartTransaction;
           queryLocal.Edit;
           queryLocal.FieldByName('VALOR_BETA').Value := TFindInHtml.getValueFromHTMLInvesting('Beta', htmlRetorno.Text);
           queryLocal.Post;
-  //        queryLocal.Transaction.Commit;
           sleep(10);
         end;
       end;
@@ -166,11 +167,10 @@ begin
     FreeAndNil(labelLocal);
     FreeAndNil(queryLocal);
     fCS.Leave;
+    DataModule.FDQueryPapelGrid.Refresh;
   except
     on E: Exception do
     begin
-    //  if queryLocal.Transaction.Active then
-    //    queryLocal.Transaction.Rollback;
       FreeAndNil(queryLocal);
       FreeAndNil(htmlRetorno);
       FreeAndNil(labelLocal);
@@ -196,7 +196,7 @@ begin
   Result.TabStop := False;
 end;
 
-procedure TFormPrincipal.cargaInicialDividendos;
+procedure TFormPrincipal.cargaInicialDividendos(const pPapel: string = '');
 var
   queryLocal: TFDQuery;
   htmlRetorno: TStrings;
@@ -206,10 +206,9 @@ begin
     fCS.Enter;
     queryLocal := TFDQuery.Create(self);
     queryLocal.Connection := DataModule.FDConnection1;
-//    queryLocal.Transaction := DataModule.FDTransactionPrincipal;
 
-    queryLocal.SQL.Add(format(cns_sql_papel_field,
-      ['ID,DESCRICAO,DIVID_EX_ATUAL,DIVID_EX_ANTERIOR,COTACAO_ATUAL,DIVID_EX_ANTERIOR_PRC']));
+    queryLocal.SQL.Add(retornaConsultaSql('ID,DESCRICAO,DIVID_EX_ATUAL,DIVID_EX_ANTERIOR,COTACAO_ATUAL,DIVID_EX_ANTERIOR_PRC', pPapel));
+
     queryLocal.Open;
     labelLocal := criaLabel(120, FormPrincipal);
     htmlRetorno := TStringList.Create;
@@ -222,7 +221,6 @@ begin
 
       if htmlRetorno.Text.Contains(FormatDateTime('YYYY', DATE)) then
       begin
-//        queryLocal.Transaction.StartTransaction;
         queryLocal.Edit;
         queryLocal.FieldByName('DIVID_EX_ATUAL').Value := buscaValor(FormatDateTime('YYYY', DATE), htmlRetorno.CommaText);
         queryLocal.FieldByName('DIVID_EX_ANTERIOR').Value :=
@@ -231,7 +229,6 @@ begin
           queryLocal.FieldByName('DIVID_EX_ANTERIOR_PRC').Value := queryLocal.FieldByName('DIVID_EX_ANTERIOR').Value /
             queryLocal.FieldByName('COTACAO_ATUAL').Value * 100;
         queryLocal.Post;
-  //      queryLocal.Transaction.Commit;
         sleep(11);
       end;
       queryLocal.Next;
@@ -240,11 +237,10 @@ begin
     FreeAndNil(queryLocal);
     FreeAndNil(labelLocal);
     fCS.Leave;
+    DataModule.FDQueryPapelGrid.Refresh;
   except
     on E: Exception do
     begin
-    //  if queryLocal.Transaction.Active then
-//        queryLocal.Transaction.Rollback;
       htmlRetorno.Clear;
       FreeAndNil(queryLocal);
       FreeAndNil(htmlRetorno);
@@ -253,7 +249,7 @@ begin
   end;
 end;
 
-procedure TFormPrincipal.cargaPLeDividaLiquida;
+procedure TFormPrincipal.cargaPLeDividaLiquida(const pPapel: string = '');
 var
   queryLocal: TFDQuery;
   htmlRetorno: TStrings;
@@ -264,9 +260,9 @@ begin
     fCS.Enter;
     queryLocal := TFDQuery.Create(self);
     queryLocal.Connection := DataModule.FDConnection1;
-//    queryLocal.Transaction := DataModule.FDTransactionPrincipal;
-    queryLocal.SQL.Add(format(cns_sql_papel_field,
-      ['ID,DESCRICAO,PL,DIVIDA_LIQUIDA_EBITIDA,DIVIDEND_YIELD,TAG_ALONG,BG_COTACAO_DESEJADA,BG_FATOR,VPA,COTACAO_ATUAL']));
+
+    queryLocal.SQL.Add(retornaConsultaSql('ID,DESCRICAO,PL,DIVIDA_LIQUIDA_EBITIDA,DIVIDEND_YIELD,TAG_ALONG,BG_COTACAO_DESEJADA,BG_FATOR,VPA,COTACAO_ATUAL', pPapel));
+
     queryLocal.Open;
 
     labelLocal := criaLabel(150, FormPrincipal);
@@ -282,18 +278,21 @@ begin
 
       if htmlRetorno.Text.Contains('EBITDA') then
       begin
-  //      queryLocal.Transaction.StartTransaction;
         queryLocal.Edit;
-        queryLocal.FieldByName('PL').Value := TFindInHtml.getValueFromHTML(format(regExStatusInvest,['P\/L']), htmlRetorno.Text);
+        queryLocal.FieldByName('PL').Value := TFindInHtml.getValueFromHTML(format(regExStatusInvest, ['P\/L']),
+          htmlRetorno.Text);
 
-        queryLocal.FieldByName('DIVIDA_LIQUIDA_EBITIDA').Value := TFindInHtml.getValueFromHTML(format(regExStatusInvest,['quida\/EBITDA']), htmlRetorno.Text);
+        queryLocal.FieldByName('DIVIDA_LIQUIDA_EBITIDA').Value :=
+          TFindInHtml.getValueFromHTML(format(regExStatusInvest, ['quida\/EBITDA']), htmlRetorno.Text);
 
-        queryLocal.FieldByName('DIVIDEND_YIELD').Value := TFindInHtml.getValueFromHTML(format(regExStatusInvest,['Dividend\sYield']), htmlRetorno.Text);
+        queryLocal.FieldByName('DIVIDEND_YIELD').Value :=
+          TFindInHtml.getValueFromHTML(format(regExStatusInvest, ['Dividend\sYield']), htmlRetorno.Text);
 
-        queryLocal.FieldByName('TAG_ALONG').Value := TFindInHtml.getValueFromHTML(format(regExStatusInvest,['Tag\sAlong']), htmlRetorno.Text);
+        queryLocal.FieldByName('TAG_ALONG').Value := TFindInHtml.getValueFromHTML(format(regExStatusInvest, ['Tag\sAlong']),
+          htmlRetorno.Text);
 
-        lpa := TFindInHtml.getValueFromHTML(format(regExStatusInvest,['LPA']), htmlRetorno.Text);
-        vpa := TFindInHtml.getValueFromHTML(format(regExStatusInvest,['VPA']), htmlRetorno.Text);
+        lpa := TFindInHtml.getValueFromHTML(format(regExStatusInvest, ['LPA']), htmlRetorno.Text);
+        vpa := TFindInHtml.getValueFromHTML(format(regExStatusInvest, ['VPA']), htmlRetorno.Text);
         if (lpa > 0) and (vpa > 0) then
         begin
           valorIntriseco := sqrt(22.5 * lpa * vpa);
@@ -310,8 +309,6 @@ begin
         queryLocal.FieldByName('VPA').AsString := FormatCurr('#.#0', vpa);
 
         queryLocal.Post;
-//        queryLocal.Transaction.Commit;
-
         sleep(10);
       end;
       queryLocal.Next;
@@ -320,11 +317,12 @@ begin
     FreeAndNil(labelLocal);
     FreeAndNil(queryLocal);
     fCS.Leave;
+    DataModule.FDQueryPapelGrid.Refresh;
   except
     on E: Exception do
     begin
-//      if queryLocal.Transaction.Active then
-//        queryLocal.Transaction.Rollback;
+      // if queryLocal.Transaction.Active then
+      // queryLocal.Transaction.Rollback;
       htmlRetorno.Clear;
       FreeAndNil(queryLocal);
       FreeAndNil(htmlRetorno);
@@ -365,25 +363,59 @@ begin
   Application.ProcessMessages;
 end;
 
-procedure TFormPrincipal.SpeedButton3Click(Sender: TObject);
+procedure TFormPrincipal.SpeedButton2Click(Sender: TObject);
+begin
+  frmAddPapel.show;
+end;
+
+procedure TFormPrincipal.btnFiltrarClick(Sender: TObject);
 begin
   PanelFiltros.Visible := False;
   PanelToolBar.Visible := True;
+
+  DataModule.FDQueryPapelGrid.CLOSE;
+  DataModule.FDQueryPapelGrid.ParamByName('descricao').AsString := '';
+
+  if NOT EditPapel.Text.IsEmpty then
+    pvFiltroFinal := format(' and (DESCRICAO like ''%s%s%s'' )', ['%', EditPapel.Text, '%'])
+  else
+  begin
+    pvFiltroFinal := format(' and (pl >= %s and pl <= %s)', [EditPLInicial.Text, EditPLFinal.Text]);
+    pvFiltroFinal := pvFiltroFinal + format(' and (DIVID_EX_ANTERIOR_PRC >= %s )', [EditPercentualDividendo.Text]);
+    pvFiltroFinal := pvFiltroFinal + format(' and (DIVIDA_LIQUIDA_EBITIDA <= %s )', [EditDividaLiquidaEbitida.Text]);
+    pvFiltroFinal := pvFiltroFinal + format(' and (TAG_ALONG >= %s )', [EditTagAlong.Text]);
+    pvFiltroFinal := pvFiltroFinal + format(' and (DIVIDEND_YIELD >= %s )', [EditDividendYield.Text]);
+    pvFiltroFinal := pvFiltroFinal + format(' and (VALOR_BETA >= %s AND VALOR_BETA <= %s )',
+      [EditBetaInicial.Text, EditBetaFinal.Text]);
+
+  end;
+
+  DataModule.FDQueryPapelGrid.SQL.Text := format(sql_default_papel_cadastro, [pvFiltroFinal, pvOrderByFinal]);
+  DataModule.FDQueryPapelGrid.Open;
+
   Application.ProcessMessages;
 end;
 
-procedure TFormPrincipal.cargaCotacao;
+function TFormPrincipal.retornaConsultaSql(const pColunas: string = ''; const pPapel: string = ''): string;
+begin
+  if pPapel.IsEmpty then
+    Result := format(cns_sql_papel_field, [pColunas])
+  else
+    Result := format(cns_sql_papel_field_where, [pColunas, ' descricao = ' + pPapel.QuotedString])
+end;
+
+procedure TFormPrincipal.cargaCotacao(const pPapel: string = '');
 var
   queryLocal: TFDQuery;
   htmlRetorno: TStrings;
   labelLocal: TLabel;
+  sqlConsulta: string;
 begin
   try
     fCS.Enter;
     queryLocal := TFDQuery.Create(self);
     queryLocal.Connection := DataModule.FDConnection1;
-//    queryLocal.Transaction := DataModule.FDTransactionPrincipal;
-    queryLocal.SQL.Add(format(cns_sql_papel_field, ['ID,DESCRICAO,COTACAO_ATUAL']));
+    queryLocal.SQL.Add(retornaConsultaSql('ID,DESCRICAO,COTACAO_ATUAL', pPapel));
     queryLocal.Open;
 
     labelLocal := criaLabel(180, FormPrincipal);
@@ -396,11 +428,9 @@ begin
       htmlRetorno := TFindInHtml.downloadHTML(queryLocal.FieldByName('DESCRICAO').AsString, url_yahoo);
       if htmlRetorno.Text.Contains('Trsdu') then
       begin
-//        queryLocal.Transaction.StartTransaction;
         queryLocal.Edit;
         queryLocal.FieldByName('COTACAO_ATUAL').Value := TFindInHtml.getValueFromHTML(regExCotacaoYahoo, htmlRetorno.Text);
         queryLocal.Post;
-  ///      queryLocal.Transaction.Commit;
       end;
       queryLocal.Next;
     end;
@@ -408,11 +438,10 @@ begin
     FreeAndNil(labelLocal);
     FreeAndNil(queryLocal);
     fCS.Leave;
+    DataModule.FDQueryPapelGrid.Refresh;
   except
     on E: Exception do
     begin
-//      if queryLocal.Transaction.Active then
-//        queryLocal.Transaction.Rollback;
       htmlRetorno.Clear;
       FreeAndNil(queryLocal);
       FreeAndNil(htmlRetorno);

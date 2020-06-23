@@ -50,7 +50,7 @@ begin
   TThread.CreateAnonymousThread(
     procedure
     begin
-      FormPrincipal.cargaPLeDividaLiquida;
+      FormPrincipal.cargaPLeDividaLiquida (FormPrincipal.EditPapel.Text.Trim);
       TThread.Synchronize(nil,
         procedure
         begin
@@ -75,7 +75,8 @@ begin
     procedure
     begin
       try
-        FormPrincipal.cargaCotacao;
+        FormPrincipal.cargaCotacao(FormPrincipal.EditPapel.Text.Trim);
+
       except
       end;
 
@@ -112,14 +113,6 @@ begin
         end);
     end).Start;
 
-  // fCS.Enter;
-  // TThread.CreateAnonymousThread(FormPrincipal.cargaCotacao).Start;
-  // fCS.Leave;
-  // fCS.Enter;
-  // TThread.CreateAnonymousThread(FormPrincipal.cargaInicialDividendos).Start;
-  // fCS.Leave;
-  // TThread.CreateAnonymousThread(FormPrincipal.cargaBeta).start;
-  // TThread.CreateAnonymousThread(FormPrincipal.cargaPLeDividaLiquida).Start;
 
 end;
 
@@ -136,7 +129,7 @@ begin
   TThread.CreateAnonymousThread(
     procedure
     begin
-      FormPrincipal.cargaInicialDividendos;
+      FormPrincipal.cargaInicialDividendos (FormPrincipal.EditPapel.Text.Trim);
       TThread.Synchronize(nil,
         procedure
         begin
@@ -155,7 +148,7 @@ begin
   TThread.CreateAnonymousThread(
     procedure
     begin
-      FormPrincipal.cargaBeta;
+      FormPrincipal.cargaBeta (FormPrincipal.EditPapel.Text.Trim);
 
       TThread.Synchronize(nil,
         procedure

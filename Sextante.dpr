@@ -7,7 +7,8 @@ uses
   uDataModule in 'uDataModule.pas' {DataModule},
   uPopup in 'uPopup.pas' {FormPopup},
   Loading in '..\comum\Loading.pas',
-  uFindInHtml in '..\comum\uFindInHtml.pas';
+  uFindInHtml in '..\comum\uFindInHtml.pas',
+  addPapel in 'addPapel.pas' {frmAddPapel};
 
 {$R *.res}
 
@@ -18,6 +19,7 @@ begin
   Application.CreateForm(TDataModule, DataModule);
   Application.CreateForm(TFormPopup, FormPopup);
   Application.CreateForm(TFormPopup, FormPopup);
+  Application.CreateForm(TfrmAddPapel, frmAddPapel);
   Application.Run;
 end.
 

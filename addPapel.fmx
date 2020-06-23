@@ -1,0 +1,61 @@
+object frmAddPapel: TfrmAddPapel
+  Left = 0
+  Top = 0
+  BorderStyle = None
+  Caption = 'Form2'
+  ClientHeight = 188
+  ClientWidth = 275
+  Fill.Color = claBlack
+  Fill.Kind = Solid
+  Position = MainFormCenter
+  FormFactor.Width = 320
+  FormFactor.Height = 480
+  FormFactor.Devices = [Desktop]
+  DesignerMasterStyle = 0
+  object Rectangle1: TRectangle
+    Align = Client
+    Fill.Color = claWhite
+    Margins.Left = 15.000000000000000000
+    Margins.Top = 15.000000000000000000
+    Margins.Right = 15.000000000000000000
+    Margins.Bottom = 15.000000000000000000
+    Size.Width = 245.000000000000000000
+    Size.Height = 158.000000000000000000
+    Size.PlatformDefault = False
+    Stroke.Color = claGold
+    Stroke.Dash = Dot
+    XRadius = 40.000000000000000000
+    YRadius = 40.000000000000000000
+  end
+  object EditPapel: TEdit
+    Touch.InteractiveGestures = [LongTap, DoubleTap]
+    TabOrder = 1
+    Position.X = 81.000000000000000000
+    Position.Y = 71.000000000000000000
+    Size.Width = 104.000000000000000000
+    Size.Height = 22.000000000000000000
+    Size.PlatformDefault = False
+    TextPrompt = 'Exemplo: VVAR3'
+    CharCase = ecUpperCase
+  end
+  object btnSalvar: TSpeedButton
+    Images = DataModule.ImageList1
+    ImageIndex = 6
+    Position.X = 97.000000000000000000
+    Position.Y = 100.000000000000000000
+    Text = 'Salvar'
+    OnClick = btnSalvarClick
+  end
+  object btnClose: TSpeedButton
+    Anchors = [akTop, akRight]
+    Images = DataModule.ImageList1
+    ImageIndex = 4
+    Margins.Right = 10.000000000000000000
+    Position.X = 211.000000000000000000
+    Position.Y = 16.000000000000000000
+    Size.Width = 40.000000000000000000
+    Size.Height = 48.000000000000000000
+    Size.PlatformDefault = False
+    StyleLookup = 'btnCloseStyle1'
+  end
+end
