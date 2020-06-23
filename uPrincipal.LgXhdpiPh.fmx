@@ -109,75 +109,7 @@ inherited FormPrincipal_LgXhdpiPh: TFormPrincipal_LgXhdpiPh
     Position.Y = 678.000000000000000000
     Size.Width = 450.000000000000000000
   end
-  inherited BindingsList1: TBindingsList
-    inherited LinkGridToDataSourceBindSourceDB1: TLinkGridToDataSource
-      Columns = <
-        item
-          MemberName = 'ID'
-          Visible = False
-        end
-        item
-          MemberName = 'DESCRICAO'
-          Header = 'Papel'
-          Width = 80
-        end
-        item
-          MemberName = 'COTACAO_ATUAL'
-          Header = 'R$ Atual'
-          Width = 80
-        end
-        item
-          MemberName = 'BG_COTACAO_DESEJADA'
-          Header = 'Valor Intr'#237'nseco (BG)'
-          Width = 80
-        end
-        item
-          MemberName = 'BG_FATOR'
-          Header = 'Margem Seg.'
-          Width = 80
-        end
-        item
-          MemberName = 'VPA'
-          Width = 80
-        end
-        item
-          MemberName = 'PL'
-          Width = 80
-        end
-        item
-          MemberName = 'DIVID_EX_ATUAL'
-          Header = 'Div. Ex. Atual'
-          Width = 80
-        end
-        item
-          MemberName = 'DIVID_EX_ANTERIOR'
-          Header = 'Div. Ex. Anterior'
-          Width = 80
-        end
-        item
-          MemberName = 'DIVID_EX_ANTERIOR_PRC'
-          Header = '%Div. Exer. Ant'
-          Width = 80
-        end
-        item
-          MemberName = 'URL_BETA'
-          Visible = False
-        end
-        item
-          MemberName = 'VALOR_BETA'
-          Header = 'Beta'
-          Width = 80
-        end
-        item
-          MemberName = 'DIVIDA_LIQUIDA_EBITIDA'
-          Header = 'Divida Liq. Ebitida'
-          Width = 80
-        end
-        item
-          MemberName = 'TAG_ALONG'
-          Header = 'Tag Along'
-          Width = 80
-        end>
-    end
+  inherited AniIndicator1: TAniIndicator
+    Enabled = True
   end
 end

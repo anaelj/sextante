@@ -131,7 +131,7 @@ object FormPopup: TFormPopup
   end
   object Panel1: TPanel
     Align = Client
-    Opacity = 0.800000011920929000
+    Opacity = 0.800000011920928900
     Size.Width = 452.000000000000000000
     Size.Height = 471.000000000000000000
     Size.PlatformDefault = False
@@ -151,6 +151,7 @@ object FormPopup: TFormPopup
       object btnPLDividaLiquida: TSpeedButton
         Align = Top
         StyledSettings = [Family, Style, FontColor]
+        Images = DataModule.ImageList1
         ImageIndex = 3
         Margins.Left = 20.000000000000000000
         Margins.Top = 50.000000000000000000
@@ -169,6 +170,7 @@ object FormPopup: TFormPopup
       object btnCotacao: TSpeedButton
         Align = Top
         StyledSettings = [Family, Style, FontColor]
+        Images = DataModule.ImageList1
         ImageIndex = 3
         Margins.Left = 20.000000000000000000
         Margins.Top = 20.000000000000000000
@@ -187,6 +189,7 @@ object FormPopup: TFormPopup
       object btnTodos: TSpeedButton
         Align = Top
         StyledSettings = [Family, Style, FontColor]
+        Images = DataModule.ImageList1
         ImageIndex = 3
         Margins.Left = 20.000000000000000000
         Margins.Top = 20.000000000000000000
@@ -200,12 +203,12 @@ object FormPopup: TFormPopup
         Text = '   Todos'
         TextSettings.Font.Size = 16.000000000000000000
         TextSettings.HorzAlign = Leading
-        Visible = False
         OnClick = btnTodosClick
       end
       object btnDividendos: TSpeedButton
         Align = Top
         StyledSettings = [Family, Style, FontColor]
+        Images = DataModule.ImageList1
         ImageIndex = 3
         Margins.Left = 20.000000000000000000
         Margins.Top = 20.000000000000000000
@@ -224,6 +227,7 @@ object FormPopup: TFormPopup
       object btnBeta: TSpeedButton
         Align = Top
         StyledSettings = [Family, Style, FontColor]
+        Images = DataModule.ImageList1
         ImageIndex = 3
         Margins.Left = 20.000000000000000000
         Margins.Top = 20.000000000000000000
@@ -248,6 +252,7 @@ object FormPopup: TFormPopup
         Stroke.Kind = Resource
         object btnClose: TSpeedButton
           Align = Right
+          Images = DataModule.ImageList1
           ImageIndex = 4
           Margins.Right = 10.000000000000000000
           Position.X = -18.000000000000000000

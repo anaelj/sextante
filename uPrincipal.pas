@@ -10,7 +10,8 @@ uses
   Data.Bind.Grid, Data.Bind.DBScope,
   FMX.StdCtrls, FMX.Edit, FMX.ListBox, System.RegularExpressions, FireDAC.Stan.Intf, FireDAC.Stan.Option, FireDAC.Stan.Param,
   FireDAC.Stan.Error, FireDAC.DatS,
-  FireDAC.Phys.Intf, FireDAC.DApt.Intf, FireDAC.Stan.Async, FireDAC.DApt, Data.DB, FireDAC.Comp.DataSet, FireDAC.Comp.Client;
+  FireDAC.Phys.Intf, FireDAC.DApt.Intf, FireDAC.Stan.Async, FireDAC.DApt, Data.DB, FireDAC.Comp.DataSet, FireDAC.Comp.Client,
+  FMX.Ani;
 
 type
   TFormPrincipal = class(TForm)
@@ -48,6 +49,8 @@ type
     StyleBook1: TStyleBook;
     btnFiltros: TSpeedButton;
     Label1: TLabel;
+    FloatAnimation1: TFloatAnimation;
+    AniIndicator1: TAniIndicator;
     procedure FormShow(Sender: TObject);
     procedure SpeedButton1Click(Sender: TObject);
     procedure btnCloseClick(Sender: TObject);
@@ -56,6 +59,7 @@ type
     procedure btnAtualizarClick(Sender: TObject);
     procedure FormCreate(Sender: TObject);
     procedure SpeedButton2Click(Sender: TObject);
+    procedure ComboBoxColunaChange(Sender: TObject);
   private
     { Private declarations }
     pvFiltroFinal: string;
@@ -178,6 +182,7 @@ begin
   end;
 end;
 
+
 class function TFormPrincipal.criaLabel(const pTop: integer; pParent: TForm): TLabel;
 begin
   Result := TLabel.Create(nil);
@@ -187,7 +192,7 @@ begin
   Result.Font.Size := 13;
   Result.Height := 70;
   Result.Width := FormPrincipal.Width - 100;
-  Result.FontColor := TAlphaColorRec.White;
+  Result.FontColor := TAlphaColorRec.Black;
   Result.TextSettings.HorzAlign := TTextAlign.Center;
   Result.TextSettings.VertAlign := TTextAlign.Leading;
   Result.StyledSettings := [TStyledSetting.Family, TStyledSetting.Style];
@@ -332,6 +337,28 @@ begin
 
 end;
 
+procedure TFormPrincipal.ComboBoxColunaChange(Sender: TObject);
+begin
+WITH DataModule DO
+  begin
+    case ComboBoxColuna.ItemIndex of
+      0:
+        pvOrderByFinal := 'order by DIVID_EX_ANTERIOR_PRC desc';
+      1:
+        pvOrderByFinal := 'order by PL ';
+      2:
+        pvOrderByFinal := 'order by VPA ';
+      3:
+        pvOrderByFinal := 'order by valor_beta desc';
+    end;
+
+    DataModule.FDQueryPapelGrid.SQL.Text := format(sql_default_papel_cadastro, [pvFiltroFinal, pvOrderByFinal]);
+
+    DataModule.FDQueryPapelGrid.Open;
+
+  end;
+end;
+
 procedure TFormPrincipal.FormCreate(Sender: TObject);
 begin
   fCS := TCriticalSection.Create;
@@ -412,6 +439,7 @@ var
   sqlConsulta: string;
 begin
   try
+
     fCS.Enter;
     queryLocal := TFDQuery.Create(self);
     queryLocal.Connection := DataModule.FDConnection1;

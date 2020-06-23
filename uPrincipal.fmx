@@ -26,6 +26,7 @@ object FormPrincipal: TFormPrincipal
     Size.Height = 340.000000000000000000
     Size.PlatformDefault = False
     TabOrder = 1
+    Visible = False
     Viewport.Width = 646.000000000000000000
     Viewport.Height = 299.000000000000000000
   end
@@ -323,6 +324,7 @@ object FormPrincipal: TFormPrincipal
       Size.Height = 44.000000000000000000
       Size.PlatformDefault = False
       TabOrder = 2
+      OnChange = ComboBoxColunaChange
     end
     object SpeedButton4: TSpeedButton
       Align = Right
@@ -512,6 +514,16 @@ object FormPrincipal: TFormPrincipal
     Size.PlatformDefault = False
     TabOrder = 11
   end
+  object FloatAnimation1: TFloatAnimation
+    Duration = 0.200000002980232200
+    StartValue = 0.000000000000000000
+    StopValue = 0.000000000000000000
+  end
+  object AniIndicator1: TAniIndicator
+    Align = Center
+    Style = Circular
+    Visible = False
+  end
   object BindSourceDB1: TBindSourceDB
     DataSet = DataModule.FDQueryPapelGrid
     ScopeMappings = <>
@@ -530,7 +542,6 @@ object FormPrincipal: TFormPrincipal
       Columns = <
         item
           MemberName = 'ID'
-          Width = -1
           Visible = False
         end
         item
@@ -578,7 +589,6 @@ object FormPrincipal: TFormPrincipal
         end
         item
           MemberName = 'URL_BETA'
-          Width = -1
           Visible = False
         end
         item
