@@ -51,6 +51,8 @@ type
     Label1: TLabel;
     FloatAnimation1: TFloatAnimation;
     AniIndicator1: TAniIndicator;
+    Label10: TLabel;
+    EditMargemSeguranca: TEdit;
     procedure FormShow(Sender: TObject);
     procedure SpeedButton1Click(Sender: TObject);
     procedure btnCloseClick(Sender: TObject);
@@ -162,16 +164,16 @@ begin
           queryLocal.Edit;
           queryLocal.FieldByName('VALOR_BETA').Value := TFindInHtml.getValueFromHTMLInvesting('Beta', htmlRetorno.Text);
           queryLocal.Post;
-          sleep(10);
         end;
       end;
       queryLocal.Next;
+      sleep(10);
     end;
     FreeAndNil(htmlRetorno);
     FreeAndNil(labelLocal);
     FreeAndNil(queryLocal);
-    fCS.Leave;
     DataModule.FDQueryPapelGrid.Refresh;
+    fCS.Leave;
   except
     on E: Exception do
     begin
@@ -181,7 +183,6 @@ begin
     end;
   end;
 end;
-
 
 class function TFormPrincipal.criaLabel(const pTop: integer; pParent: TForm): TLabel;
 begin
@@ -212,7 +213,8 @@ begin
     queryLocal := TFDQuery.Create(self);
     queryLocal.Connection := DataModule.FDConnection1;
 
-    queryLocal.SQL.Add(retornaConsultaSql('ID,DESCRICAO,DIVID_EX_ATUAL,DIVID_EX_ANTERIOR,COTACAO_ATUAL,DIVID_EX_ANTERIOR_PRC', pPapel));
+    queryLocal.SQL.Add
+      (retornaConsultaSql('ID,DESCRICAO,DIVID_EX_ATUAL,DIVID_EX_ANTERIOR,COTACAO_ATUAL,DIVID_EX_ANTERIOR_PRC', pPapel));
 
     queryLocal.Open;
     labelLocal := criaLabel(120, FormPrincipal);
@@ -223,7 +225,6 @@ begin
       htmlRetorno.Clear;
       labelLocal.Text := format(url_dividendos_fundamentus, [queryLocal.FieldByName('DESCRICAO').AsString]);
       htmlRetorno := TFindInHtml.downloadHTML(queryLocal.FieldByName('DESCRICAO').AsString, url_dividendos_fundamentus);
-
       if htmlRetorno.Text.Contains(FormatDateTime('YYYY', DATE)) then
       begin
         queryLocal.Edit;
@@ -234,9 +235,9 @@ begin
           queryLocal.FieldByName('DIVID_EX_ANTERIOR_PRC').Value := queryLocal.FieldByName('DIVID_EX_ANTERIOR').Value /
             queryLocal.FieldByName('COTACAO_ATUAL').Value * 100;
         queryLocal.Post;
-        sleep(11);
       end;
       queryLocal.Next;
+      sleep(11);
     end;
     FreeAndNil(htmlRetorno);
     FreeAndNil(queryLocal);
@@ -266,7 +267,10 @@ begin
     queryLocal := TFDQuery.Create(self);
     queryLocal.Connection := DataModule.FDConnection1;
 
-    queryLocal.SQL.Add(retornaConsultaSql('ID,DESCRICAO,PL,DIVIDA_LIQUIDA_EBITIDA,DIVIDEND_YIELD,TAG_ALONG,BG_COTACAO_DESEJADA,BG_FATOR,VPA,COTACAO_ATUAL', pPapel));
+    queryLocal.SQL.Add
+      (retornaConsultaSql
+      ('ID,DESCRICAO,PL,DIVIDA_LIQUIDA_EBITIDA,DIVIDEND_YIELD,TAG_ALONG,BG_COTACAO_DESEJADA,BG_FATOR,VPA,COTACAO_ATUAL',
+      pPapel));
 
     queryLocal.Open;
 
@@ -275,7 +279,6 @@ begin
 
     while not queryLocal.eof do
     begin
-
       labelLocal.Text := format(url_statusinvest, [queryLocal.FieldByName('DESCRICAO').AsString]);
 
       htmlRetorno.Clear;
@@ -312,22 +315,19 @@ begin
         queryLocal.FieldByName('BG_COTACAO_DESEJADA').AsString := FormatCurr('#.#0', valorIntriseco);
         queryLocal.FieldByName('BG_FATOR').AsString := FormatCurr('#.#0', margemSeguranca);
         queryLocal.FieldByName('VPA').AsString := FormatCurr('#.#0', vpa);
-
         queryLocal.Post;
-        sleep(10);
       end;
       queryLocal.Next;
+      sleep(10);
     end;
     FreeAndNil(htmlRetorno);
     FreeAndNil(labelLocal);
     FreeAndNil(queryLocal);
-    fCS.Leave;
     DataModule.FDQueryPapelGrid.Refresh;
+    fCS.Leave;
   except
     on E: Exception do
     begin
-      // if queryLocal.Transaction.Active then
-      // queryLocal.Transaction.Rollback;
       htmlRetorno.Clear;
       FreeAndNil(queryLocal);
       FreeAndNil(htmlRetorno);
@@ -339,7 +339,7 @@ end;
 
 procedure TFormPrincipal.ComboBoxColunaChange(Sender: TObject);
 begin
-WITH DataModule DO
+  WITH DataModule DO
   begin
     case ComboBoxColuna.ItemIndex of
       0:
@@ -408,12 +408,13 @@ begin
   else
   begin
     pvFiltroFinal := format(' and (pl >= %s and pl <= %s)', [EditPLInicial.Text, EditPLFinal.Text]);
-    pvFiltroFinal := pvFiltroFinal + format(' and (DIVID_EX_ANTERIOR_PRC >= %s )', [EditPercentualDividendo.Text]);
-    pvFiltroFinal := pvFiltroFinal + format(' and (DIVIDA_LIQUIDA_EBITIDA <= %s )', [EditDividaLiquidaEbitida.Text]);
-    pvFiltroFinal := pvFiltroFinal + format(' and (TAG_ALONG >= %s )', [EditTagAlong.Text]);
-    pvFiltroFinal := pvFiltroFinal + format(' and (DIVIDEND_YIELD >= %s )', [EditDividendYield.Text]);
+    pvFiltroFinal := pvFiltroFinal + format(' and (DIVID_EX_ANTERIOR_PRC >= %s )', [EditPercentualDividendo.Text.Replace(',','.')]);
+    pvFiltroFinal := pvFiltroFinal + format(' and (DIVIDA_LIQUIDA_EBITIDA <= %s )', [EditDividaLiquidaEbitida.Text.Replace(',','.')]);
+    pvFiltroFinal := pvFiltroFinal + format(' and (TAG_ALONG >= %s )', [EditTagAlong.Text.Replace(',','.')]);
+    pvFiltroFinal := pvFiltroFinal + format(' and (DIVIDEND_YIELD >= %s )', [EditDividendYield.Text.Replace(',','.')]);
+    pvFiltroFinal := pvFiltroFinal + format(' and (BG_FATOR >= %s )', [EditMargemSeguranca.Text.Replace(',','.')]);
     pvFiltroFinal := pvFiltroFinal + format(' and (VALOR_BETA >= %s AND VALOR_BETA <= %s )',
-      [EditBetaInicial.Text, EditBetaFinal.Text]);
+      [EditBetaInicial.Text.Replace(',','.'), EditBetaFinal.Text.Replace(',','.')]);
 
   end;
 
@@ -439,7 +440,6 @@ var
   sqlConsulta: string;
 begin
   try
-
     fCS.Enter;
     queryLocal := TFDQuery.Create(self);
     queryLocal.Connection := DataModule.FDConnection1;
@@ -454,6 +454,7 @@ begin
       htmlRetorno.Clear;
       labelLocal.Text := format(url_yahoo, [queryLocal.FieldByName('DESCRICAO').AsString]);
       htmlRetorno := TFindInHtml.downloadHTML(queryLocal.FieldByName('DESCRICAO').AsString, url_yahoo);
+
       if htmlRetorno.Text.Contains('Trsdu') then
       begin
         queryLocal.Edit;
@@ -465,8 +466,9 @@ begin
     FreeAndNil(htmlRetorno);
     FreeAndNil(labelLocal);
     FreeAndNil(queryLocal);
-    fCS.Leave;
     DataModule.FDQueryPapelGrid.Refresh;
+    fCS.Leave;
+    sleep(13);
   except
     on E: Exception do
     begin

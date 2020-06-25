@@ -98,15 +98,8 @@ begin
   FDConnection1.Params.Values['Database'] := FileName;
 
   FDConnection1.Connected := True;
-  criaCampoBanco('PAR', 'VALOR_DIF_MENOR', 'NUMERIC(15,2)', '0');
-  criaCampoBanco('PAR', 'VALOR_DIF_MAIOR', 'NUMERIC(15,2)', '0');
-  criaCampoBanco('PAR', 'VALOR_DIF_ATUAL', 'NUMERIC(15,2)', '0');
 
-  criaCampoBanco('PAPEL', 'URL_BETA', 'varchar(250)', 'https://br.investing.com/equities/???');
-  criaCampoBanco('PAPEL', 'VALOR_BETA', 'NUMERIC(15,2)', '0');
-  criaCampoBanco('PAPEL', 'DIVIDA_LIQUIDA_EBITIDA', 'NUMERIC(15,2)', '0');
-  criaCampoBanco('PAPEL', 'TAG_ALONG', 'NUMERIC(15,2)', '0');
-  criaCampoBanco('PAPEL', 'DIVIDEND_YIELD', 'NUMERIC(15,2)', '0');
+//  criaCampoBanco('PAPEL', 'DIVIDEND_YIELD', 'NUMERIC(15,2)', '0');
 
   FDConnection1.Connected := false;
   FDConnection1.Connected := True;

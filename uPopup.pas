@@ -45,7 +45,6 @@ uses uDataModule, Loading, uPrincipal;
 
 procedure TFormPopup.btnPLDividaLiquidaClick(Sender: TObject);
 begin
-//  TLoading.Show(FormPrincipal, 'Buscando dados...');
   FormPrincipal.StringGrid1.Visible := false;
   TThread.CreateAnonymousThread(
     procedure
@@ -54,7 +53,6 @@ begin
       TThread.Synchronize(nil,
         procedure
         begin
-//          TLoading.Hide;
           FormPrincipal.StringGrid1.Visible := true;
         end);
     end).Start;
@@ -68,7 +66,6 @@ end;
 
 procedure TFormPopup.btnCotacaoClick(Sender: TObject);
 begin
-//  TLoading.Show(FormPrincipal, 'Buscando dados...');
   FormPrincipal.StringGrid1.Visible := false;
 
   TThread.CreateAnonymousThread(
@@ -83,7 +80,6 @@ begin
       TThread.Synchronize(nil,
         procedure
         begin
-//          TLoading.Hide;
           FormPrincipal.StringGrid1.Visible := true;
         end);
 
@@ -96,14 +92,11 @@ procedure TFormPopup.btnTodosClick(Sender: TObject);
 begin
   close;
 
-  TThread.CreateAnonymousThread( FormPrincipal.cargaCotacao ('')).Start;
-  TThread.CreateAnonymousThread( FormPrincipal.cargaInicialDividendos).Start;
-  TThread.CreateAnonymousThread( FormPrincipal.cargaBeta).Start;
-  TThread.CreateAnonymousThread( FormPrincipal.cargaPLeDividaLiquida).Start;
 
 //  TLoading.Show(FormPrincipal, 'Buscando dados...');
 
-{  TThread.CreateAnonymousThread(
+
+  TThread.CreateAnonymousThread(
     procedure
     begin
       FormPrincipal.cargaCotacao;
@@ -114,10 +107,12 @@ begin
       TThread.Synchronize(nil,
         procedure
         begin
-//          TLoading.Hide;
+          FormPrincipal.StringGrid1.Visible := True;
+          DataModule.FDQueryPapelGrid.Refresh;
         end);
     end).Start;
- }
+
+
 
 end;
 
@@ -129,7 +124,6 @@ end;
 
 procedure TFormPopup.btnDividendosClick(Sender: TObject);
 begin
-//  TLoading.Show(FormPrincipal, 'Buscando dados...');
   FormPrincipal.StringGrid1.Visible := false;
   TThread.CreateAnonymousThread(
     procedure
@@ -138,7 +132,6 @@ begin
       TThread.Synchronize(nil,
         procedure
         begin
-//          TLoading.Hide;
           FormPrincipal.StringGrid1.Visible := true;
         end);
     end).Start;
@@ -147,7 +140,6 @@ end;
 
 procedure TFormPopup.btnBetaClick(Sender: TObject);
 begin
-//  TLoading.Show(FormPrincipal, 'Buscando dados...');
   FormPrincipal.StringGrid1.Visible := false;
 
   TThread.CreateAnonymousThread(
@@ -158,7 +150,6 @@ begin
       TThread.Synchronize(nil,
         procedure
         begin
-//          TLoading.Hide;
           FormPrincipal.StringGrid1.Visible := true;
         end);
 

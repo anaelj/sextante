@@ -26,7 +26,6 @@ object FormPrincipal: TFormPrincipal
     Size.Height = 340.000000000000000000
     Size.PlatformDefault = False
     TabOrder = 1
-    Visible = False
     Viewport.Width = 646.000000000000000000
     Viewport.Height = 299.000000000000000000
   end
@@ -71,7 +70,7 @@ object FormPrincipal: TFormPrincipal
       end
       object EditDividaLiquidaEbitida: TEdit
         Touch.InteractiveGestures = [LongTap, DoubleTap]
-        TabOrder = 2
+        TabOrder = 3
         Text = '4'
         Position.X = 446.000000000000000000
         Position.Y = 83.000000000000000000
@@ -84,7 +83,7 @@ object FormPrincipal: TFormPrincipal
       end
       object EditPapel: TEdit
         Touch.InteractiveGestures = [LongTap, DoubleTap]
-        TabOrder = 3
+        TabOrder = 4
         Position.X = 124.000000000000000000
         Position.Y = 23.000000000000000000
         Size.Width = 81.000000000000000000
@@ -94,7 +93,7 @@ object FormPrincipal: TFormPrincipal
       end
       object EditPercentualDividendo: TEdit
         Touch.InteractiveGestures = [LongTap, DoubleTap]
-        TabOrder = 4
+        TabOrder = 5
         Text = '0'
         Position.X = 124.000000000000000000
         Position.Y = 113.000000000000000000
@@ -107,7 +106,7 @@ object FormPrincipal: TFormPrincipal
       end
       object EditPLFinal: TEdit
         Touch.InteractiveGestures = [LongTap, DoubleTap]
-        TabOrder = 5
+        TabOrder = 6
         Text = '14'
         Position.X = 209.000000000000000000
         Position.Y = 53.000000000000000000
@@ -117,7 +116,7 @@ object FormPrincipal: TFormPrincipal
       end
       object EditPLInicial: TEdit
         Touch.InteractiveGestures = [LongTap, DoubleTap]
-        TabOrder = 6
+        TabOrder = 7
         Text = '-100'
         Position.X = 124.000000000000000000
         Position.Y = 53.000000000000000000
@@ -127,7 +126,7 @@ object FormPrincipal: TFormPrincipal
       end
       object EditTagAlong: TEdit
         Touch.InteractiveGestures = [LongTap, DoubleTap]
-        TabOrder = 8
+        TabOrder = 9
         Text = '0'
         Position.X = 446.000000000000000000
         Position.Y = 23.000000000000000000
@@ -146,7 +145,7 @@ object FormPrincipal: TFormPrincipal
         Size.PlatformDefault = False
         TextSettings.HorzAlign = Trailing
         Text = 'Tag Along >='
-        TabOrder = 10
+        TabOrder = 11
       end
       object Label3: TLabel
         Position.X = 2.000000000000000000
@@ -156,7 +155,7 @@ object FormPrincipal: TFormPrincipal
         Size.PlatformDefault = False
         TextSettings.HorzAlign = Trailing
         Text = 'Faixa PL'
-        TabOrder = 11
+        TabOrder = 12
       end
       object Label4: TLabel
         Position.X = 172.000000000000000000
@@ -165,17 +164,17 @@ object FormPrincipal: TFormPrincipal
         Size.Height = 17.000000000000000000
         Size.PlatformDefault = False
         Text = 'At'#233
-        TabOrder = 12
+        TabOrder = 13
       end
       object Label5: TLabel
         Position.X = 2.000000000000000000
-        Position.Y = 116.000000000000000000
+        Position.Y = 120.000000000000000000
         Size.Width = 120.000000000000000000
         Size.Height = 17.000000000000000000
         Size.PlatformDefault = False
         TextSettings.HorzAlign = Trailing
         Text = '%Dividendo >='
-        TabOrder = 13
+        TabOrder = 14
       end
       object Label6: TLabel
         Position.X = 345.000000000000000000
@@ -185,7 +184,7 @@ object FormPrincipal: TFormPrincipal
         Size.PlatformDefault = False
         TextSettings.HorzAlign = Trailing
         Text = 'D.EBT <='
-        TabOrder = 14
+        TabOrder = 16
       end
       object Label7: TLabel
         Position.X = 2.000000000000000000
@@ -195,7 +194,7 @@ object FormPrincipal: TFormPrincipal
         Size.PlatformDefault = False
         TextSettings.HorzAlign = Trailing
         Text = 'Papel'
-        TabOrder = 15
+        TabOrder = 17
       end
       object Label8: TLabel
         Position.X = 171.000000000000000000
@@ -204,7 +203,7 @@ object FormPrincipal: TFormPrincipal
         Size.Height = 17.000000000000000000
         Size.PlatformDefault = False
         Text = 'At'#233
-        TabOrder = 16
+        TabOrder = 18
       end
       object LabelBeta: TLabel
         Position.X = 2.000000000000000000
@@ -214,7 +213,7 @@ object FormPrincipal: TFormPrincipal
         Size.PlatformDefault = False
         TextSettings.HorzAlign = Trailing
         Text = 'Beta >='
-        TabOrder = 17
+        TabOrder = 19
       end
       object Label9: TLabel
         Position.X = 307.000000000000000000
@@ -224,11 +223,11 @@ object FormPrincipal: TFormPrincipal
         Size.PlatformDefault = False
         TextSettings.HorzAlign = Trailing
         Text = 'Dvidend Yield >='
-        TabOrder = 9
+        TabOrder = 10
       end
       object EditDividendYield: TEdit
         Touch.InteractiveGestures = [LongTap, DoubleTap]
-        TabOrder = 7
+        TabOrder = 8
         Text = '0'
         Position.X = 446.000000000000000000
         Position.Y = 53.000000000000000000
@@ -265,6 +264,29 @@ object FormPrincipal: TFormPrincipal
         Size.PlatformDefault = False
         StyleLookup = 'btnCloseStyle1'
         OnClick = btnCloseClick
+      end
+      object Label10: TLabel
+        Position.X = 322.000000000000000000
+        Position.Y = 121.000000000000000000
+        Size.Width = 120.000000000000000000
+        Size.Height = 17.000000000000000000
+        Size.PlatformDefault = False
+        TextSettings.HorzAlign = Trailing
+        Text = 'Marg. Seguran'#231'a >='
+        TabOrder = 15
+      end
+      object EditMargemSeguranca: TEdit
+        Touch.InteractiveGestures = [LongTap, DoubleTap]
+        TabOrder = 2
+        Text = '0'
+        Position.X = 446.000000000000000000
+        Position.Y = 113.000000000000000000
+        Hint = 'Divida liquida sobre o ebitida.'
+        Size.Width = 40.000000000000000000
+        Size.Height = 32.000000000000000000
+        Size.PlatformDefault = False
+        ParentShowHint = False
+        ShowHint = True
       end
     end
   end

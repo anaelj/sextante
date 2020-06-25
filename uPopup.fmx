@@ -131,7 +131,7 @@ object FormPopup: TFormPopup
   end
   object Panel1: TPanel
     Align = Client
-    Opacity = 0.800000011920928900
+    Opacity = 0.800000011920929000
     Size.Width = 452.000000000000000000
     Size.Height = 471.000000000000000000
     Size.PlatformDefault = False
@@ -203,6 +203,7 @@ object FormPopup: TFormPopup
         Text = '   Todos'
         TextSettings.Font.Size = 16.000000000000000000
         TextSettings.HorzAlign = Leading
+        Visible = False
         OnClick = btnTodosClick
       end
       object btnDividendos: TSpeedButton

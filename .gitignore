@@ -9,3 +9,12 @@ Win32/
 Android/
 Sextante.exe
 Win64/
+*.o
+*.xml
+executaveis/
+Sextante/bin/
+Sextante/classes/
+Sextante/
+*.dex
+*.res
+*.identcache
