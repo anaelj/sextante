@@ -44,3 +44,6 @@ App para consulta e filtro de ações da B3 para análise fundamentalista
 	
 - Tag Alog
   > https://pt.wikipedia.org/wiki/Tag_along
+
+
+<img src=""> </img>
