@@ -1,12 +1,12 @@
 inherited FormPrincipal_LgXhdpiPh: TFormPrincipal_LgXhdpiPh
-  ClientHeight = 695
+  ClientHeight = 720
   ClientWidth = 450
   DesignerMasterStyle = 3
   inherited StringGrid1: TStringGrid
     Size.Width = 420.000000000000000000
-    Size.Height = 435.000000000000000000
+    Size.Height = 460.000000000000000000
     Viewport.Width = 420.000000000000000000
-    Viewport.Height = 435.000000000000000000
+    Viewport.Height = 460.000000000000000000
   end
   inherited PanelFiltros: TPanel
     Size.Width = 420.000000000000000000
@@ -98,6 +98,8 @@ inherited FormPrincipal_LgXhdpiPh: TFormPrincipal_LgXhdpiPh
     end
     inherited SpeedButton4: TSpeedButton
       Position.X = 369.000000000000000000
+      Position.Y = 8.000000000000000000
+      Size.Height = 48.000000000000000000
     end
     inherited btnFiltros: TSpeedButton
       Position.Y = 8.000000000000000000
@@ -106,7 +108,7 @@ inherited FormPrincipal_LgXhdpiPh: TFormPrincipal_LgXhdpiPh
     end
   end
   inherited Label1: TLabel
-    Position.Y = 678.000000000000000000
+    Position.Y = 703.000000000000000000
     Size.Width = 450.000000000000000000
   end
   inherited AniIndicator1: TAniIndicator
