@@ -46,4 +46,4 @@ App para consulta e filtro de ações da B3 para análise fundamentalista
   > https://pt.wikipedia.org/wiki/Tag_along
 
 
-<img src=""> </img>
+<img src="https://github.com/anaelj/sextante/blob/master/imagens/imagem_tela.jpg"> </img>
