@@ -1,8 +1,6 @@
 *.dcu
 *.*~
 *.so
-
-*.zip
 Sextante.dproj
 Sextante.dproj.local
 Win32/
