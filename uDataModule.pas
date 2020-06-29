@@ -10,8 +10,13 @@ uses
   FireDAC.Phys.SQLiteDef, FireDAC.Stan.ExprFuncs,
   FireDAC.FMXUI.Wait, FireDAC.Stan.Param, FireDAC.DatS, FireDAC.DApt.Intf, FireDAC.DApt, Data.Bind.EngExt, FMX.Bind.DBEngExt,
   Data.DB, FireDAC.Comp.DataSet,
-  System.ImageList, FMX.ImgList, FireDAC.Comp.Client, Data.Bind.Components, Data.Bind.DBScope,   Data.Bind.ObjectScope, FMX.StdCtrls,
-  FMX.Controls.Presentation, FMX.ScrollBox, FMX.Memo, System.RegularExpressions;
+  System.ImageList, FMX.ImgList, FireDAC.Comp.Client, Data.Bind.Components, Data.Bind.DBScope, Data.Bind.ObjectScope,
+  FMX.StdCtrls,
+{$IF DEFINED(MSWINDOWS)}
+  UrlMon,
+{$ENDIF}
+  FMX.Controls.Presentation, FMX.ScrollBox, FMX.Memo, System.RegularExpressions, IdBaseComponent, IdComponent,
+  IdTCPConnection, IdTCPClient, IdHTTP;
 
 type
   TDataModule = class(TForm)
@@ -54,7 +59,7 @@ type
 
   public
     { Public declarations }
-    pbLabelHabilitado : Boolean;
+    pbLabelHabilitado: Boolean;
     url_default: string;
 
   end;
@@ -91,24 +96,42 @@ uses uPrincipal, Loading;
 procedure TDataModule.FormCreate(Sender: TObject);
 var
   AppPath, FileName: string;
+  function DownLoadInternetFile(Source, Dest: String): Boolean;
+  begin
+    try
+{$IF DEFINED(MSWINDOWS)}
+      Result := URLDownloadToFile(nil, PChar(Source), PChar(Dest), 0, nil) = 0
+{$ELSE}
+      Result := False // ainda não implementado para android/ios
+{$ENDIF}
+    except
+      Result := False;
+    end;
+  end;
+
 begin
 
+{$IF DEFINED(ANDROID)}
   AppPath := TPath.GetHomePath;
   FileName := TPath.Combine(AppPath, 'dados_sextante.db');
   FDConnection1.Params.Values['Database'] := FileName;
-
+{$ELSE}
+  FDConnection1.Params.Values['Database'] := GetCurrentDir + '\dados_sextante.db';
+  if not FileExists(FDConnection1.Params.Values['Database']) then
+  begin
+    DownLoadInternetFile('https://github.com/anaelj/sextante/raw/master/database/dados_sextante.db', 'dados_sextante.db');
+  end;
+{$ENDIF}
   FDConnection1.Connected := True;
 
-//  criaCampoBanco('PAPEL', 'DIVIDEND_YIELD', 'NUMERIC(15,2)', '0');
-
-  FDConnection1.Connected := false;
-  FDConnection1.Connected := True;
+  // criaCampoBanco('PAPEL', 'DIVIDEND_YIELD', 'NUMERIC(15,2)', '0');
+  // FDConnection1.Connected := false;
+  // FDConnection1.Connected := True;
 
   FDQueryPapelGrid.Open();
 
   pbLabelHabilitado := True;
 end;
-
 
 procedure TDataModule.criaCampoBanco(pTabela, pCampo, pTipo,
   pValorDefault: String);
@@ -118,7 +141,7 @@ begin
   FDMetaInfoQueryTabela.ObjectName := pTabela;
   FDMetaInfoQueryTabela.Open;
 
-  FDMetaInfoQueryTabela.Filtered := false;
+  FDMetaInfoQueryTabela.Filtered := False;
   FDMetaInfoQueryTabela.Filter := Format('COLUMN_NAME = ''%s''', [pCampo.ToUpper]);
   FDMetaInfoQueryTabela.Filtered := True;
 

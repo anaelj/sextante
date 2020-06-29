@@ -23,11 +23,11 @@ object FormPrincipal: TFormPrincipal
     Margins.Right = 15.000000000000000000
     Margins.Bottom = 5.000000000000000000
     Size.Width = 666.000000000000000000
-    Size.Height = 340.000000000000000000
+    Size.Height = 335.000000000000000000
     Size.PlatformDefault = False
     TabOrder = 1
     Viewport.Width = 646.000000000000000000
-    Viewport.Height = 299.000000000000000000
+    Viewport.Height = 294.000000000000000000
   end
   object PanelFiltros: TPanel
     Align = Top
@@ -293,9 +293,10 @@ object FormPrincipal: TFormPrincipal
   object PanelToolBar: TPanel
     Align = Top
     Margins.Left = 15.000000000000000000
+    Margins.Top = 5.000000000000000000
     Margins.Right = 15.000000000000000000
     Position.X = 15.000000000000000000
-    Position.Y = 169.000000000000000000
+    Position.Y = 174.000000000000000000
     Size.Width = 666.000000000000000000
     Size.Height = 64.000000000000000000
     Size.PlatformDefault = False
@@ -305,8 +306,10 @@ object FormPrincipal: TFormPrincipal
       StyledSettings = [Family, FontColor]
       Images = DataModule.ImageList1
       ImageIndex = 6
+      Margins.Left = 5.000000000000000000
       Margins.Right = 10.000000000000000000
-      Size.Width = 185.000000000000000000
+      Position.X = 5.000000000000000000
+      Size.Width = 161.000000000000000000
       Size.Height = 64.000000000000000000
       Size.PlatformDefault = False
       StyleLookup = 'SpeedButtonPersonalizado'
@@ -320,9 +323,10 @@ object FormPrincipal: TFormPrincipal
       StyledSettings = [Family, FontColor]
       Images = DataModule.ImageList1
       ImageIndex = 3
+      Margins.Left = 5.000000000000000000
       Margins.Right = 10.000000000000000000
-      Position.X = 347.000000000000000000
-      Size.Width = 183.000000000000000000
+      Position.X = 282.000000000000000000
+      Size.Width = 158.000000000000000000
       Size.Height = 64.000000000000000000
       Size.PlatformDefault = False
       StyleLookup = 'SpeedButtonPersonalizado'
@@ -331,30 +335,14 @@ object FormPrincipal: TFormPrincipal
       TextSettings.Font.StyleExt = {00070000000000000004000000}
       OnClick = btnAtualizarClick
     end
-    object ComboBoxColuna: TComboBox
-      Align = Left
-      Items.Strings = (
-        'Porcentagem Dividendo'
-        'PL'
-        'VPA'
-        'Beta')
-      Margins.Top = 10.000000000000000000
-      Margins.Bottom = 10.000000000000000000
-      Position.X = 540.000000000000000000
-      Position.Y = 10.000000000000000000
-      Size.Width = 77.000000000000000000
-      Size.Height = 44.000000000000000000
-      Size.PlatformDefault = False
-      TabOrder = 2
-      OnChange = ComboBoxColunaChange
-    end
     object SpeedButton4: TSpeedButton
       Align = Right
       Images = DataModule.ImageList1
       ImageIndex = 4
-      Margins.Right = 10.000000000000000000
-      Position.X = 615.000000000000000000
-      Size.Width = 41.000000000000000000
+      Margins.Left = 10.000000000000000000
+      Margins.Right = 2.000000000000000000
+      Position.X = 624.000000000000000000
+      Size.Width = 40.000000000000000000
       Size.Height = 64.000000000000000000
       Size.PlatformDefault = False
       StyleLookup = 'btnCloseStyle1'
@@ -365,9 +353,10 @@ object FormPrincipal: TFormPrincipal
       StyledSettings = [Family, FontColor]
       Images = DataModule.ImageList1
       ImageIndex = 5
+      Margins.Left = 5.000000000000000000
       Margins.Right = 10.000000000000000000
-      Position.X = 195.000000000000000000
-      Size.Width = 142.000000000000000000
+      Position.X = 181.000000000000000000
+      Size.Width = 86.000000000000000000
       Size.Height = 64.000000000000000000
       Size.PlatformDefault = False
       StyleLookup = 'SpeedButtonPersonalizado'
@@ -375,6 +364,32 @@ object FormPrincipal: TFormPrincipal
       TextSettings.Font.Size = 16.000000000000000000
       TextSettings.Font.StyleExt = {00070000000000000004000000}
       OnClick = btnFiltrosClick
+    end
+    object GroupBox2: TGroupBox
+      Align = Left
+      Position.X = 450.000000000000000000
+      Size.Width = 159.000000000000000000
+      Size.Height = 64.000000000000000000
+      Size.PlatformDefault = False
+      Text = 'Ordena'#231#227'o'
+      TabOrder = 2
+      object ComboBoxColuna: TComboBox
+        Align = Client
+        Items.Strings = (
+          'Porcentagem Dividendo'
+          'PL'
+          'VPA'
+          'Beta')
+        Margins.Left = 10.000000000000000000
+        Margins.Top = 15.000000000000000000
+        Margins.Right = 10.000000000000000000
+        Margins.Bottom = 10.000000000000000000
+        Size.Width = 139.000000000000000000
+        Size.Height = 39.000000000000000000
+        Size.PlatformDefault = False
+        TabOrder = 0
+        OnChange = ComboBoxColunaChange
+      end
     end
   end
   object StyleBook1: TStyleBook

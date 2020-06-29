@@ -53,6 +53,7 @@ type
     AniIndicator1: TAniIndicator;
     Label10: TLabel;
     EditMargemSeguranca: TEdit;
+    GroupBox2: TGroupBox;
     procedure FormShow(Sender: TObject);
     procedure SpeedButton1Click(Sender: TObject);
     procedure btnCloseClick(Sender: TObject);
@@ -64,6 +65,7 @@ type
     procedure ComboBoxColunaChange(Sender: TObject);
   private
     { Private declarations }
+
     pvFiltroFinal: string;
     pvOrderByFinal: string;
     fCS: TCriticalSection;
@@ -71,7 +73,10 @@ type
     function buscaValor(pExercicio: string; pTexto: string): variant;
     class function criaLabel(const pTop: integer; pParent: TForm): TLabel; static;
     function retornaConsultaSql(const pColunas: string = ''; const pPapel: string = ''): string;
+
     // function buscaValorGeneric(pExpReg, pTexto: string): variant;
+  type
+    TFormatoEdit = (edtfmtUnknown, edtfmtString, edtfmtReal, edtfmtInteger);
 
   public
     { Public declarations }
@@ -377,8 +382,9 @@ begin
 
   for var i := 0 to self.ComponentCount - 1 do
   begin
-    if self.Components[i] is TEdit then
+    if (self.Components[i] is TEdit) then
       TEdit(self.Components[i]).Size.Height := 25;
+
   end;
 
 end;
@@ -396,6 +402,32 @@ begin
 end;
 
 procedure TFormPrincipal.btnFiltrarClick(Sender: TObject);
+  function makeEditValidFormatValue(var pValue: TEdit; pFormat: TFormatoEdit = edtfmtUnknown): string;
+  begin
+    case pFormat of
+      edtfmtUnknown:
+        Result := '';
+      edtfmtString:
+        begin
+          Result := pValue.Text.QuotedString;
+        end;
+      edtfmtReal:
+        begin
+          if pValue.Text.Trim.IsEmpty then
+            pValue.Text := '0';
+          Result := pValue.Text.Replace(',', '.');
+        end;
+      edtfmtInteger:
+        begin
+          if pValue.Text.Trim.IsEmpty then
+            pValue.Text := '0';
+          Result := pValue.Text.Replace(',', '').Replace('.', '');
+        end;
+    else
+      Result := '';
+    end;
+  end;
+
 begin
   PanelFiltros.Visible := False;
   PanelToolBar.Visible := True;
@@ -408,13 +440,17 @@ begin
   else
   begin
     pvFiltroFinal := format(' and (pl >= %s and pl <= %s)', [EditPLInicial.Text, EditPLFinal.Text]);
-    pvFiltroFinal := pvFiltroFinal + format(' and (DIVID_EX_ANTERIOR_PRC >= %s )', [EditPercentualDividendo.Text.Replace(',','.')]);
-    pvFiltroFinal := pvFiltroFinal + format(' and (DIVIDA_LIQUIDA_EBITIDA <= %s )', [EditDividaLiquidaEbitida.Text.Replace(',','.')]);
-    pvFiltroFinal := pvFiltroFinal + format(' and (TAG_ALONG >= %s )', [EditTagAlong.Text.Replace(',','.')]);
-    pvFiltroFinal := pvFiltroFinal + format(' and (DIVIDEND_YIELD >= %s )', [EditDividendYield.Text.Replace(',','.')]);
-    pvFiltroFinal := pvFiltroFinal + format(' and (BG_FATOR >= %s )', [EditMargemSeguranca.Text.Replace(',','.')]);
+    pvFiltroFinal := pvFiltroFinal + format(' and (DIVID_EX_ANTERIOR_PRC >= %s )',
+      [makeEditValidFormatValue(EditPercentualDividendo, edtfmtReal)]);
+    pvFiltroFinal := pvFiltroFinal + format(' and (DIVIDA_LIQUIDA_EBITIDA <= %s )',
+      [makeEditValidFormatValue(EditDividaLiquidaEbitida, edtfmtReal)]);
+    pvFiltroFinal := pvFiltroFinal + format(' and (TAG_ALONG >= %s )', [makeEditValidFormatValue(EditTagAlong, edtfmtReal)]);
+    pvFiltroFinal := pvFiltroFinal + format(' and (DIVIDEND_YIELD >= %s )',
+      [makeEditValidFormatValue(EditDividendYield, edtfmtReal)]);
+    pvFiltroFinal := pvFiltroFinal + format(' and (BG_FATOR >= %s )',
+      [makeEditValidFormatValue(EditMargemSeguranca, edtfmtReal)]);
     pvFiltroFinal := pvFiltroFinal + format(' and (VALOR_BETA >= %s AND VALOR_BETA <= %s )',
-      [EditBetaInicial.Text.Replace(',','.'), EditBetaFinal.Text.Replace(',','.')]);
+      [makeEditValidFormatValue(EditBetaInicial, edtfmtReal), makeEditValidFormatValue(EditBetaFinal, edtfmtReal)]);
 
   end;
 
