@@ -3,7 +3,7 @@ unit uPrincipal;
 interface
 
 uses
-  System.SysUtils, System.Types, System.UITypes, System.Classes, System.Variants,
+  System.SysUtils, System.Types, System.UITypes, System.Classes, System.Variants,  DateUtils,
   FMX.Types, FMX.Controls, FMX.Forms, FMX.Graphics, FMX.Dialogs, System.Rtti, FMX.Grid.Style, FMX.Controls.Presentation,
   FMX.ScrollBox, FMX.Grid, syncObjs,
   Data.Bind.EngExt, FMX.Bind.DBEngExt, FMX.Bind.Grid, System.Bindings.Outputs, FMX.Bind.Editors, Data.Bind.Components,
@@ -230,7 +230,7 @@ begin
       htmlRetorno.Clear;
       labelLocal.Text := format(url_dividendos_fundamentus, [queryLocal.FieldByName('DESCRICAO').AsString]);
       htmlRetorno := TFindInHtml.downloadHTML(queryLocal.FieldByName('DESCRICAO').AsString, url_dividendos_fundamentus);
-      if htmlRetorno.Text.Contains(FormatDateTime('YYYY', DATE)) then
+      if (htmlRetorno.Text.Contains(FormatDateTime('YYYY', DATE))) or (htmlRetorno.Text.Contains(FormatDateTime('YYYY', IncYear(DATE,-1))))   then
       begin
         queryLocal.Edit;
         queryLocal.FieldByName('DIVID_EX_ATUAL').Value := buscaValor(FormatDateTime('YYYY', DATE), htmlRetorno.CommaText);

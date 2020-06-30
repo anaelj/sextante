@@ -4,9 +4,9 @@ inherited FormPrincipal_NmXhdpiPh: TFormPrincipal_NmXhdpiPh
   DesignerMasterStyle = 3
   inherited StringGrid1: TStringGrid
     Size.Width = 370.000000000000000000
-    Size.Height = 380.000000000000000000
+    Size.Height = 375.000000000000000000
     Viewport.Width = 370.000000000000000000
-    Viewport.Height = 380.000000000000000000
+    Viewport.Height = 375.000000000000000000
   end
   inherited PanelFiltros: TPanel
     Size.Width = 370.000000000000000000
@@ -30,7 +30,7 @@ inherited FormPrincipal_NmXhdpiPh: TFormPrincipal_NmXhdpiPh
       TextSettings.Font.StyleExt = {00070000000000000004000000}
     end
     inherited SpeedButton4: TSpeedButton
-      Position.X = 319.000000000000000000
+      Position.X = 328.000000000000000000
       Position.Y = 8.000000000000000000
       Size.Height = 48.000000000000000000
     end
