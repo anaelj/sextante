@@ -83,7 +83,7 @@ const
 
   url_yahoo = 'https://finance.yahoo.com/quote/%s.SA/';
 
-  regExCotacaoYahoo = 'Trsdu.*?\<\/';
+  regExCotacaoYahoo = 'data-test="OPEN-value".*?\<\/';
   regExStatusInvest = '%s.+?\d\<\/';
 
 implementation
