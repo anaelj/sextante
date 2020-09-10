@@ -18,6 +18,7 @@ type
     StyleBook1: TStyleBook;
     Panel1: TPanel;
     Rectangle2: TRectangle;
+    btnPeterLynch: TSpeedButton;
     procedure btnPLDividaLiquidaClick(Sender: TObject);
     procedure btnBetaClick(Sender: TObject);
     procedure btnCotacaoClick(Sender: TObject);
@@ -25,6 +26,7 @@ type
     procedure btnTodosClick(Sender: TObject);
     procedure btnCloseClick(Sender: TObject);
     procedure FormCreate(Sender: TObject);
+    procedure btnPeterLynchClick(Sender: TObject);
   private
     { Private declarations }
     fCS: TCriticalSection;
@@ -42,6 +44,23 @@ implementation
 
 
 uses uDataModule, Loading, uPrincipal;
+
+procedure TFormPopup.btnPeterLynchClick(Sender: TObject);
+begin
+  FormPrincipal.StringGrid1.Visible := false;
+  TThread.CreateAnonymousThread(
+    procedure
+    begin
+      FormPrincipal.cargaPeterLynch (FormPrincipal.EditPapel.Text.Trim);
+      TThread.Synchronize(nil,
+        procedure
+        begin
+          FormPrincipal.StringGrid1.Visible := true;
+        end);
+    end).Start;
+  close;
+
+end;
 
 procedure TFormPopup.btnPLDividaLiquidaClick(Sender: TObject);
 begin

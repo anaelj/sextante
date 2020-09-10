@@ -52,6 +52,8 @@ type
     FDQueryPapelGridVALOR_BETA: TBCDField;
     FDQueryPapelGridDIVIDA_LIQUIDA_EBITIDA: TBCDField;
     FDQueryPapelGridTAG_ALONG: TBCDField;
+    FDQueryPapelGridDIVIDEND_YIELD: TBCDField;
+    FDQueryPapelGridINDICADOR_PETER_LYNCH: TBCDField;
     procedure FormCreate(Sender: TObject);
   private
     procedure criaCampoBanco(pTabela, pCampo, pTipo, pValorDefault: String);
@@ -76,6 +78,8 @@ const
     'https://br.advfn.com/bolsa-de-valores/bovespa/sanepar-on-%S/cotacao';
   url_guiainvest = 'https://www.guiainvest.com.br/raiox/default.aspx?sigla=%s';
   url_dividendos_fundamentus = 'https://www.fundamentus.com.br/proventos.php?papel=%s&tipo=2';
+  url_fundamentus = 'https://www.fundamentus.com.br/detalhes.php?papel=%s';
+
   sql_default_papel_cadastro =
     'select * from papel where ((descricao = :descricao) OR (COALESCE(:descricao, '''') = '''')) %s %s';
 
@@ -85,6 +89,8 @@ const
 
   regExCotacaoYahoo = 'data-test="OPEN-value".*?\<\/';
   regExStatusInvest = '%s.+?\d\<\/';
+  regExFundamentusCrescimento = '%s.+\n*.+\n*.+?<\/';
+
 
 implementation
 
@@ -124,7 +130,7 @@ begin
 {$ENDIF}
   FDConnection1.Connected := True;
 
-  // criaCampoBanco('PAPEL', 'DIVIDEND_YIELD', 'NUMERIC(15,2)', '0');
+  criaCampoBanco('PAPEL', 'INDICADOR_PETER_LYNCH', 'NUMERIC(15,2)', '0'); // PL / CRESCIMENTO, QUANDO MENOR MELHOR
   // FDConnection1.Connected := false;
   // FDConnection1.Connected := True;
 

@@ -11,7 +11,8 @@ uses
   FMX.StdCtrls, FMX.Edit, FMX.ListBox, System.RegularExpressions, FireDAC.Stan.Intf, FireDAC.Stan.Option, FireDAC.Stan.Param,
   FireDAC.Stan.Error, FireDAC.DatS,
   FireDAC.Phys.Intf, FireDAC.DApt.Intf, FireDAC.Stan.Async, FireDAC.DApt, Data.DB, FireDAC.Comp.DataSet, FireDAC.Comp.Client,
-  FMX.Ani, IdBaseComponent, IdComponent, IdTCPConnection, IdTCPClient, IdHTTP;
+  FMX.Ani, IdBaseComponent, IdComponent, IdTCPConnection, IdTCPClient, IdHTTP, IdIOHandler, IdIOHandlerSocket, IdIOHandlerStack, IdSSL, IdSSLOpenSSL,
+  System.Net.URLClient, System.Net.HttpClient, System.Net.HttpClientComponent;
 
 type
   TFormPrincipal = class(TForm)
@@ -54,7 +55,7 @@ type
     Label10: TLabel;
     EditMargemSeguranca: TEdit;
     GroupBox2: TGroupBox;
-    IdHTTP1: TIdHTTP;
+    NetHTTPClient1: TNetHTTPClient;
     procedure FormShow(Sender: TObject);
     procedure SpeedButton1Click(Sender: TObject);
     procedure btnCloseClick(Sender: TObject);
@@ -355,6 +356,7 @@ var
   labelLocal: TLabel;
   crescimento: variant;
 begin
+
   try
     fCS.Enter;
     queryLocal := TFDQuery.Create(self);

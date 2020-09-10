@@ -131,7 +131,7 @@ object FormPopup: TFormPopup
   end
   object Panel1: TPanel
     Align = Client
-    Opacity = 0.800000011920929000
+    Opacity = 0.800000011920928900
     Size.Width = 452.000000000000000000
     Size.Height = 471.000000000000000000
     Size.PlatformDefault = False
@@ -263,6 +263,25 @@ object FormPopup: TFormPopup
           StyleLookup = 'btnCloseStyle1'
           OnClick = btnCloseClick
         end
+      end
+      object btnPeterLynch: TSpeedButton
+        Align = Top
+        StyledSettings = [Family, Style, FontColor]
+        Images = DataModule.ImageList1
+        ImageIndex = 3
+        Margins.Left = 20.000000000000000000
+        Margins.Top = 20.000000000000000000
+        Margins.Right = 20.000000000000000000
+        Position.X = 20.000000000000000000
+        Position.Y = 290.000000000000000000
+        Size.Width = 352.000000000000000000
+        Size.Height = 40.000000000000000000
+        Size.PlatformDefault = False
+        StyleLookup = 'SpeedButtonPersonalizado'
+        Text = '   Peter Lynch'
+        TextSettings.Font.Size = 16.000000000000000000
+        TextSettings.HorzAlign = Leading
+        OnClick = btnPeterLynchClick
       end
     end
   end
