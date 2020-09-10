@@ -28,30 +28,14 @@ implementation
 
 class function TFindInHtml.downloadHTML(const pValue: string; const pUrl: string = ''): TStrings;
 var
-  RESTClientLocal: TRESTClient;
-  RESTRequestLocal: TRESTRequest;
-  RESTResponseLocal: TRESTResponse;
-  http: TIdHTTP;
-  stream: TMemoryStream;
-  url: string;
-  handle: TIdSSLIOHandlerSocketOpenSSL;
   NetHTTPClient: TNetHTTPClient;
+  stream: TMemoryStream;
 begin
   try
-
-    http := TIdHTTP.Create(nil);
-
     NetHTTPClient := TNetHTTPClient.Create(nil);
 
     result := TStringList.Create;
     result.Clear;
-
-    RESTRequestLocal := TRESTRequest.Create(nil);
-    RESTClientLocal := TRESTClient.Create(nil);
-    RESTResponseLocal := TRESTResponse.Create(nil);
-
-    RESTRequestLocal.Client := RESTClientLocal;
-    RESTRequestLocal.Response := RESTResponseLocal;
 
     if pUrl.IsEmpty then
       Exit;
@@ -61,105 +45,33 @@ begin
     NetHTTPClient.Get(Format(pUrl, [pValue]), stream);
     stream.Position := 0;
     result.LoadFromStream(stream);
-
-    handle := TIdSSLIOHandlerSocketOpenSSL.Create(http);
-
-    with handle do
-    begin
-      SSLOptions.Method := sslvSSLv3;
-      SSLOptions.Mode := sslmClient;
-      SSLOptions.VerifyMode := [];
-      SSLOptions.VerifyDepth := 0;
-      SSLOptions.SSLVersions := [sslvSSLv2, sslvSSLv3, sslvTLSv1, sslvTLSv1_1, sslvTLSv1_2]
-    end;
-
-    with http do
-    begin
-      IOHandler := handle;
-      ReadTimeout := 0;
-      AllowCookies := true;
-      ProxyParams.BasicAuthentication := true;
-      ProxyParams.ProxyPort := 0;
-      request.ContentLength := -1;
-      request.ContentRangeEnd := 0;
-      request.ContentRangeStart := 0;
-      request.Accept := 'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8';
-      request.ContentType := 'text/xml';
-      request.CharSet := 'utf-8';
-      request.UserAgent := 'Mozilla/3.0 (compatible; Indy Library)';
-    end;
-    url := Format(pUrl.Replace('https', 'http'), [pValue]);
-    result.Clear;
-    http.Get(url, stream);
-    stream.Position := 0;
-    result.LoadFromStream(stream);
-
-    result.Text := result.Text.Replace(''#10'', '', [rfReplaceAll])
-      .Replace(''#13'', '', [rfReplaceAll]).Replace(''#10''#13'', '',
+    result.Text := result.Text.
+      Replace(''#10'', '', [rfReplaceAll]).
+      Replace(''#13'', '', [rfReplaceAll]).
+      Replace(''#10''#13'', '',
       [rfReplaceAll]);
 
-    //
-    // // RESTRequestLocal.ContentType := 'application/json;odata=light;charset=utf-8;';
-    // RESTClientLocal.UserAgent :=
-    // 'User-Agent:Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/58.0.3029.96 Safari/537.36';
-    // RESTRequestLocal.HandleRedirects := true;
-    // RESTRequestLocal.AcceptEncoding := 'gzip, deflate';
-    //
-    // // RESTRequestLocal.AddParameter('Content-Type', 'application/text', TRESTRequestParameterKind.pkHTTPHEADER,
-    // // [poDoNotEncode]);
-    // // RESTRequestLocal.AddParameter('Accept', 'application/text', TRESTRequestParameterKind.pkHTTPHEADER, [poDoNotEncode]);
-    // // RESTRequestLocal.Accept := 'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8';
-    // RESTRequestLocal.Execute;
-    // result.Clear;
-    // result.Add(RESTResponseLocal.Content.Replace(''#10'', '', [rfReplaceAll])
-    // .Replace(''#13'', '', [rfReplaceAll]).Replace(''#10''#13'', '',
-    // [rfReplaceAll]));
-
-    handle.Free;
-    FreeAndNil(http);
     stream.Free;
-
-    FreeAndNil(RESTResponseLocal);
-    FreeAndNil(RESTClientLocal);
-    FreeAndNil(RESTRequestLocal);
+    FreeAndNil(NetHTTPClient);
   except
     on E: Exception do
     BEGIN
-      try
-        RESTClientLocal.BaseURL := Format(pUrl, [pValue]);
-        RESTRequestLocal.Execute;
-        result.Clear;
-        result.Add(RESTResponseLocal.Content.Replace(''#10'', '', [rfReplaceAll])
-          .Replace(''#13'', '', [rfReplaceAll]).Replace(''#10''#13'', '',
-          [rfReplaceAll]));
-      except
-        on E: Exception do
-        begin
-          result.Clear;
-          result.Add(E.Message);
-          handle.Free;
-          FreeAndNil(http);
-          stream.Free;
-          FreeAndNil(RESTResponseLocal);
-          FreeAndNil(RESTClientLocal);
-          FreeAndNil(RESTRequestLocal);
-        end;
-      end;
-
       result.Clear;
       result.Add(E.Message);
-      handle.Free;
-      FreeAndNil(http);
       stream.Free;
-      FreeAndNil(RESTResponseLocal);
-      FreeAndNil(RESTClientLocal);
-      FreeAndNil(RESTRequestLocal);
-    END;
+      FreeAndNil(NetHTTPClient);
+    end;
   end;
-
 end;
 
-class function TFindInHtml.getValueFromHTML(const pExpReg: string; const pTexto: string): variant;
+class
+  function TFindInHtml.getValueFromHTML(
+  const
+  pExpReg:
+  string;
+  const
+  pTexto:
+  string): variant;
 var
   RegularExpression: TRegEx;
   MatchParcial, MatchFinal: TMatch;
@@ -189,7 +101,14 @@ begin
   result := valorAux;
 end;
 
-class function TFindInHtml.getValueFromHTMLInvesting(const pValor: string; const pTexto: string): variant;
+class
+  function TFindInHtml.getValueFromHTMLInvesting(
+  const
+  pValor:
+  string;
+  const
+  pTexto:
+  string): variant;
 var
   RegularExpression: TRegEx;
   Match: TMatch;
