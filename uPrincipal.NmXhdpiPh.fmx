@@ -31,6 +31,8 @@ inherited FormPrincipal_NmXhdpiPh: TFormPrincipal_NmXhdpiPh
     end
     inherited SpeedButton4: TSpeedButton
       Position.X = 328.000000000000000000
+      Position.Y = 8.000000000000000000
+      Size.Height = 48.000000000000000000
     end
     inherited btnFiltros: TSpeedButton
       Position.Y = 8.000000000000000000
