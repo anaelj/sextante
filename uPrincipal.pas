@@ -12,7 +12,7 @@ uses
   FireDAC.Stan.Error, FireDAC.DatS,
   FireDAC.Phys.Intf, FireDAC.DApt.Intf, FireDAC.Stan.Async, FireDAC.DApt, Data.DB, FireDAC.Comp.DataSet, FireDAC.Comp.Client,
   FMX.Ani, IdBaseComponent, IdComponent, IdTCPConnection, IdTCPClient, IdHTTP, IdIOHandler, IdIOHandlerSocket, IdIOHandlerStack, IdSSL, IdSSLOpenSSL,
-  System.Net.URLClient, System.Net.HttpClient, System.Net.HttpClientComponent;
+  System.Net.URLClient, System.Net.HttpClient, System.Net.HttpClientComponent, FMX.Layouts;
 
 type
   TFormPrincipal = class(TForm)
@@ -56,6 +56,12 @@ type
     EditMargemSeguranca: TEdit;
     GroupBox2: TGroupBox;
     NetHTTPClient1: TNetHTTPClient;
+    Label11: TLabel;
+    EditPeterLynch: TEdit;
+    GridLayout1: TGridLayout;
+    GridLayout2: TGridLayout;
+    GridLayout3: TGridLayout;
+    GridLayout4: TGridLayout;
     procedure FormShow(Sender: TObject);
     procedure SpeedButton1Click(Sender: TObject);
     procedure btnCloseClick(Sender: TObject);
@@ -521,7 +527,8 @@ begin
       [makeEditValidFormatValue(EditMargemSeguranca, edtfmtReal)]);
     pvFiltroFinal := pvFiltroFinal + format(' and (VALOR_BETA >= %s AND VALOR_BETA <= %s )',
       [makeEditValidFormatValue(EditBetaInicial, edtfmtReal), makeEditValidFormatValue(EditBetaFinal, edtfmtReal)]);
-
+    pvFiltroFinal := pvFiltroFinal + format(' and (INDICADOR_PETER_LYNCH <= %s )',
+      [makeEditValidFormatValue(EditPeterLynch, edtfmtReal)]);
   end;
 
   DataModule.FDQueryPapelGrid.SQL.Text := format(sql_default_papel_cadastro, [pvFiltroFinal, pvOrderByFinal]);

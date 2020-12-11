@@ -37,11 +37,22 @@ begin
 end;
 
 procedure TfrmAddPapel.btnSalvarClick(Sender: TObject);
+var
+  idPapel: Integer;
 begin
-  DataModule.FDConnection1.ExecSQL(format('insert into papel (descricao) values (''%s'')', [EditPapel.Text]));
+  TryStrToInt(DataModule.FDConnection1.ExecSQLScalar(format('select id from papel where descricao = ''%s''',
+    [EditPapel.Text])), idPapel);
+  if idPapel > 0 then
+    ShowMessage('Papel Já cadastrado')
+  ELSE
+  BEGIN
+    DataModule.FDConnection1.ExecSQL(format('insert into papel (descricao) values (''%s'')', [EditPapel.Text]));
+    Close;
+    FormPrincipal.EditPapel.Text := EditPapel.Text;
+    FormPrincipal.btnFiltrarClick(self);
+    ShowMessage('Papel cadastrado com sucesso!')
+  end;
   Close;
-  FormPrincipal.EditPapel.Text := EditPapel.Text;
-  FormPrincipal.btnFiltrarClick(self);
 end;
 
 end.

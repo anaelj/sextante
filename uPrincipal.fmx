@@ -4,7 +4,7 @@ object FormPrincipal: TFormPrincipal
   BorderStyle = None
   Caption = 'Sextante'
   ClientHeight = 600
-  ClientWidth = 696
+  ClientWidth = 1162
   Position = ScreenCenter
   StyleBook = StyleBook1
   WindowState = wsMaximized
@@ -13,7 +13,7 @@ object FormPrincipal: TFormPrincipal
   FormFactor.Devices = [Desktop]
   OnCreate = FormCreate
   OnShow = FormShow
-  DesignerMasterStyle = 0
+  DesignerMasterStyle = 3
   object StringGrid1: TStringGrid
     Align = Client
     CanFocus = True
@@ -22,12 +22,12 @@ object FormPrincipal: TFormPrincipal
     Margins.Top = 5.000000000000000000
     Margins.Right = 15.000000000000000000
     Margins.Bottom = 5.000000000000000000
-    Size.Width = 666.000000000000000000
-    Size.Height = 335.000000000000000000
+    Size.Width = 1132.000000000000000000
+    Size.Height = 359.000000000000000000
     Size.PlatformDefault = False
     TabOrder = 1
-    Viewport.Width = 646.000000000000000000
-    Viewport.Height = 294.000000000000000000
+    Viewport.Width = 1127.000000000000000000
+    Viewport.Height = 327.000000000000000000
   end
   object PanelFiltros: TPanel
     Align = Top
@@ -36,257 +36,352 @@ object FormPrincipal: TFormPrincipal
     Margins.Right = 15.000000000000000000
     Position.X = 15.000000000000000000
     Position.Y = 15.000000000000000000
-    Size.Width = 666.000000000000000000
-    Size.Height = 154.000000000000000000
+    Size.Width = 1132.000000000000000000
+    Size.Height = 130.000000000000000000
     Size.PlatformDefault = False
     StyleLookup = 'PanelSemBorda'
     TabOrder = 0
     object GroupBox1: TGroupBox
       Align = Client
-      Size.Width = 666.000000000000000000
-      Size.Height = 154.000000000000000000
+      Size.Width = 1132.000000000000000000
+      Size.Height = 130.000000000000000000
       Size.PlatformDefault = False
       Text = 'Filtros'
       TabOrder = 0
-      object EditBetaFinal: TEdit
-        Touch.InteractiveGestures = [LongTap, DoubleTap]
-        TabOrder = 0
-        Text = '9'
-        Position.X = 212.000000000000000000
-        Position.Y = 83.000000000000000000
-        Size.Width = 40.000000000000000000
-        Size.Height = 32.000000000000000000
-        Size.PlatformDefault = False
-      end
-      object EditBetaInicial: TEdit
-        Touch.InteractiveGestures = [LongTap, DoubleTap]
-        TabOrder = 1
-        Text = '0'
-        Position.X = 124.000000000000000000
-        Position.Y = 83.000000000000000000
-        Size.Width = 40.000000000000000000
-        Size.Height = 32.000000000000000000
-        Size.PlatformDefault = False
-      end
-      object EditDividaLiquidaEbitida: TEdit
-        Touch.InteractiveGestures = [LongTap, DoubleTap]
-        TabOrder = 3
-        Text = '4'
-        Position.X = 446.000000000000000000
-        Position.Y = 83.000000000000000000
-        Hint = 'Divida liquida sobre o ebitida.'
-        Size.Width = 40.000000000000000000
-        Size.Height = 32.000000000000000000
-        Size.PlatformDefault = False
-        ParentShowHint = False
-        ShowHint = True
-      end
-      object EditPapel: TEdit
-        Touch.InteractiveGestures = [LongTap, DoubleTap]
-        TabOrder = 4
-        Position.X = 124.000000000000000000
-        Position.Y = 23.000000000000000000
-        Size.Width = 81.000000000000000000
-        Size.Height = 32.000000000000000000
-        Size.PlatformDefault = False
-        CharCase = ecUpperCase
-      end
-      object EditPercentualDividendo: TEdit
-        Touch.InteractiveGestures = [LongTap, DoubleTap]
-        TabOrder = 5
-        Text = '0'
-        Position.X = 124.000000000000000000
-        Position.Y = 113.000000000000000000
-        Hint = '% de dividendo pago em relacao ao preco da o papel.'
-        Size.Width = 40.000000000000000000
-        Size.Height = 32.000000000000000000
-        Size.PlatformDefault = False
-        ParentShowHint = False
-        ShowHint = True
-      end
-      object EditPLFinal: TEdit
-        Touch.InteractiveGestures = [LongTap, DoubleTap]
-        TabOrder = 6
-        Text = '14'
-        Position.X = 209.000000000000000000
-        Position.Y = 53.000000000000000000
-        Size.Width = 40.000000000000000000
-        Size.Height = 32.000000000000000000
-        Size.PlatformDefault = False
-      end
-      object EditPLInicial: TEdit
-        Touch.InteractiveGestures = [LongTap, DoubleTap]
-        TabOrder = 7
-        Text = '-100'
-        Position.X = 124.000000000000000000
-        Position.Y = 53.000000000000000000
-        Size.Width = 42.000000000000000000
-        Size.Height = 32.000000000000000000
-        Size.PlatformDefault = False
-      end
-      object EditTagAlong: TEdit
-        Touch.InteractiveGestures = [LongTap, DoubleTap]
-        TabOrder = 9
-        Text = '0'
-        Position.X = 446.000000000000000000
-        Position.Y = 23.000000000000000000
-        Hint = 'Divida liquida sobre o ebitida.'
-        Size.Width = 40.000000000000000000
-        Size.Height = 32.000000000000000000
-        Size.PlatformDefault = False
-        ParentShowHint = False
-        ShowHint = True
-      end
-      object Label2: TLabel
-        Position.X = 307.000000000000000000
-        Position.Y = 30.000000000000000000
-        Size.Width = 136.000000000000000000
-        Size.Height = 17.000000000000000000
-        Size.PlatformDefault = False
-        TextSettings.HorzAlign = Trailing
-        Text = 'Tag Along >='
-        TabOrder = 11
-      end
-      object Label3: TLabel
-        Position.X = 2.000000000000000000
-        Position.Y = 56.000000000000000000
-        Size.Width = 120.000000000000000000
-        Size.Height = 17.000000000000000000
-        Size.PlatformDefault = False
-        TextSettings.HorzAlign = Trailing
-        Text = 'Faixa PL'
-        TabOrder = 12
-      end
-      object Label4: TLabel
-        Position.X = 172.000000000000000000
-        Position.Y = 60.000000000000000000
-        Size.Width = 32.000000000000000000
-        Size.Height = 17.000000000000000000
-        Size.PlatformDefault = False
-        Text = 'At'#233
-        TabOrder = 13
-      end
-      object Label5: TLabel
-        Position.X = 2.000000000000000000
-        Position.Y = 120.000000000000000000
-        Size.Width = 120.000000000000000000
-        Size.Height = 17.000000000000000000
-        Size.PlatformDefault = False
-        TextSettings.HorzAlign = Trailing
-        Text = '%Dividendo >='
-        TabOrder = 14
-      end
-      object Label6: TLabel
-        Position.X = 345.000000000000000000
-        Position.Y = 91.000000000000000000
-        Size.Width = 98.000000000000000000
-        Size.Height = 17.000000000000000000
-        Size.PlatformDefault = False
-        TextSettings.HorzAlign = Trailing
-        Text = 'D.EBT <='
-        TabOrder = 16
-      end
-      object Label7: TLabel
-        Position.X = 2.000000000000000000
-        Position.Y = 26.000000000000000000
-        Size.Width = 120.000000000000000000
-        Size.Height = 17.000000000000000000
-        Size.PlatformDefault = False
-        TextSettings.HorzAlign = Trailing
-        Text = 'Papel'
-        TabOrder = 17
-      end
-      object Label8: TLabel
-        Position.X = 171.000000000000000000
-        Position.Y = 90.000000000000000000
-        Size.Width = 33.000000000000000000
-        Size.Height = 17.000000000000000000
-        Size.PlatformDefault = False
-        Text = 'At'#233
-        TabOrder = 18
-      end
-      object LabelBeta: TLabel
-        Position.X = 2.000000000000000000
-        Position.Y = 86.000000000000000000
-        Size.Width = 120.000000000000000000
-        Size.Height = 17.000000000000000000
-        Size.PlatformDefault = False
-        TextSettings.HorzAlign = Trailing
-        Text = 'Beta >='
-        TabOrder = 19
-      end
-      object Label9: TLabel
-        Position.X = 307.000000000000000000
-        Position.Y = 60.000000000000000000
-        Size.Width = 136.000000000000000000
-        Size.Height = 17.000000000000000000
-        Size.PlatformDefault = False
-        TextSettings.HorzAlign = Trailing
-        Text = 'Dvidend Yield >='
-        TabOrder = 10
-      end
-      object EditDividendYield: TEdit
-        Touch.InteractiveGestures = [LongTap, DoubleTap]
-        TabOrder = 8
-        Text = '0'
-        Position.X = 446.000000000000000000
-        Position.Y = 53.000000000000000000
-        Hint = 'Divida liquida sobre o ebitida.'
-        Size.Width = 40.000000000000000000
-        Size.Height = 32.000000000000000000
-        Size.PlatformDefault = False
-        ParentShowHint = False
-        ShowHint = True
-      end
-      object btnFiltrar: TSpeedButton
-        StyledSettings = [Family, FontColor]
-        Images = DataModule.ImageList1
-        ImageIndex = 5
-        Position.X = 513.000000000000000000
-        Position.Y = 72.000000000000000000
-        Size.Width = 104.000000000000000000
-        Size.Height = 48.000000000000000000
-        Size.PlatformDefault = False
-        StyleLookup = 'SpeedButtonPersonalizado'
-        Text = 'Filtrar'
-        TextSettings.Font.Size = 16.000000000000000000
-        TextSettings.Font.StyleExt = {00070000000000000004000000}
-        OnClick = btnFiltrarClick
-      end
       object btnClose: TSpeedButton
         Anchors = [akTop, akRight]
         Images = DataModule.ImageList1
         ImageIndex = 4
         Margins.Right = 10.000000000000000000
-        Position.X = 626.000000000000000000
+        Position.X = 1092.000000000000000000
         Size.Width = 40.000000000000000000
         Size.Height = 48.000000000000000000
         Size.PlatformDefault = False
         StyleLookup = 'btnCloseStyle1'
         OnClick = btnCloseClick
       end
-      object Label10: TLabel
-        Position.X = 322.000000000000000000
-        Position.Y = 121.000000000000000000
-        Size.Width = 120.000000000000000000
-        Size.Height = 17.000000000000000000
+      object GridLayout1: TGridLayout
+        Align = Left
+        ItemHeight = 40.000000000000000000
+        ItemWidth = 90.000000000000000000
+        Orientation = Horizontal
+        Margins.Left = 20.000000000000000000
+        Position.X = 157.000000000000000000
+        Size.Width = 380.000000000000000000
+        Size.Height = 130.000000000000000000
         Size.PlatformDefault = False
-        TextSettings.HorzAlign = Trailing
-        Text = 'Marg. Seguran'#231'a >='
-        TabOrder = 15
+        TabOrder = 0
+        object Label10: TLabel
+          StyledSettings = [Family, Style, FontColor]
+          Size.Width = 90.000000000000000000
+          Size.Height = 40.000000000000000000
+          Size.PlatformDefault = False
+          TextSettings.Font.Size = 10.000000000000000000
+          TextSettings.HorzAlign = Trailing
+          Text = 'Marg. Seguran'#231'a >='
+          TabOrder = 0
+        end
+        object EditMargemSeguranca: TEdit
+          Touch.InteractiveGestures = [LongTap, DoubleTap]
+          TabOrder = 1
+          Text = '0'
+          TextSettings.Font.Size = 10.000000000000000000
+          Position.X = 90.000000000000000000
+          Hint = 'Divida liquida sobre o ebitida.'
+          Size.Width = 90.000000000000000000
+          Size.Height = 32.000000000000000000
+          Size.PlatformDefault = False
+          StyledSettings = [Family, Style, FontColor]
+          ParentShowHint = False
+          ShowHint = True
+        end
+        object Label11: TLabel
+          StyledSettings = [Family, Style, FontColor]
+          Position.X = 180.000000000000000000
+          Size.Width = 90.000000000000000000
+          Size.Height = 40.000000000000000000
+          Size.PlatformDefault = False
+          TextSettings.Font.Size = 10.000000000000000000
+          TextSettings.HorzAlign = Trailing
+          Text = ' P. Lynch <='
+          TabOrder = 2
+        end
+        object EditPeterLynch: TEdit
+          Touch.InteractiveGestures = [LongTap, DoubleTap]
+          TabOrder = 3
+          Text = '10'
+          TextSettings.Font.Size = 10.000000000000000000
+          Position.X = 270.000000000000000000
+          Hint = 'Divida liquida sobre o ebitida.'
+          Size.Width = 90.000000000000000000
+          Size.Height = 32.000000000000000000
+          Size.PlatformDefault = False
+          StyledSettings = [Family, Style, FontColor]
+          ParentShowHint = False
+          ShowHint = True
+        end
+        object Label2: TLabel
+          StyledSettings = [Family, Style, FontColor]
+          Position.Y = 40.000000000000000000
+          Size.Width = 90.000000000000000000
+          Size.Height = 40.000000000000000000
+          Size.PlatformDefault = False
+          TextSettings.Font.Size = 10.000000000000000000
+          TextSettings.HorzAlign = Trailing
+          Text = 'Tag Along >='
+          TabOrder = 4
+        end
+        object EditTagAlong: TEdit
+          Touch.InteractiveGestures = [LongTap, DoubleTap]
+          TabOrder = 5
+          Text = '0'
+          TextSettings.Font.Size = 10.000000000000000000
+          Position.X = 90.000000000000000000
+          Position.Y = 40.000000000000000000
+          Hint = 'Divida liquida sobre o ebitida.'
+          Size.Width = 90.000000000000000000
+          Size.Height = 32.000000000000000000
+          Size.PlatformDefault = False
+          StyledSettings = [Family, Style, FontColor]
+          ParentShowHint = False
+          ShowHint = True
+        end
+        object Label9: TLabel
+          StyledSettings = [Family, Style, FontColor]
+          Position.X = 180.000000000000000000
+          Position.Y = 40.000000000000000000
+          Size.Width = 90.000000000000000000
+          Size.Height = 40.000000000000000000
+          Size.PlatformDefault = False
+          TextSettings.Font.Size = 10.000000000000000000
+          TextSettings.HorzAlign = Trailing
+          Text = 'Dvidend Yield >='
+          TabOrder = 6
+        end
+        object EditDividendYield: TEdit
+          Touch.InteractiveGestures = [LongTap, DoubleTap]
+          TabOrder = 7
+          Text = '0'
+          TextSettings.Font.Size = 10.000000000000000000
+          Position.X = 270.000000000000000000
+          Position.Y = 40.000000000000000000
+          Hint = 'Divida liquida sobre o ebitida.'
+          Size.Width = 90.000000000000000000
+          Size.Height = 32.000000000000000000
+          Size.PlatformDefault = False
+          StyledSettings = [Family, Style, FontColor]
+          ParentShowHint = False
+          ShowHint = True
+        end
+        object Label6: TLabel
+          StyledSettings = [Family, Style, FontColor]
+          Position.Y = 80.000000000000000000
+          Size.Width = 90.000000000000000000
+          Size.Height = 40.000000000000000000
+          Size.PlatformDefault = False
+          TextSettings.Font.Size = 10.000000000000000000
+          TextSettings.HorzAlign = Trailing
+          Text = 'D.EBT <='
+          TabOrder = 8
+        end
+        object EditDividaLiquidaEbitida: TEdit
+          Touch.InteractiveGestures = [LongTap, DoubleTap]
+          TabOrder = 9
+          Text = '4'
+          TextSettings.Font.Size = 10.000000000000000000
+          Position.X = 90.000000000000000000
+          Position.Y = 80.000000000000000000
+          Hint = 'Divida liquida sobre o ebitida.'
+          Size.Width = 90.000000000000000000
+          Size.Height = 32.000000000000000000
+          Size.PlatformDefault = False
+          StyledSettings = [Family, Style, FontColor]
+          ParentShowHint = False
+          ShowHint = True
+        end
+        object Label5: TLabel
+          StyledSettings = [Family, Style, FontColor]
+          Position.X = 180.000000000000000000
+          Position.Y = 80.000000000000000000
+          Size.Width = 90.000000000000000000
+          Size.Height = 40.000000000000000000
+          Size.PlatformDefault = False
+          TextSettings.Font.Size = 10.000000000000000000
+          TextSettings.HorzAlign = Trailing
+          Text = '%Dividendo >='
+          TabOrder = 10
+        end
+        object EditPercentualDividendo: TEdit
+          Touch.InteractiveGestures = [LongTap, DoubleTap]
+          TabOrder = 11
+          Text = '0'
+          TextSettings.Font.Size = 10.000000000000000000
+          Position.X = 270.000000000000000000
+          Position.Y = 80.000000000000000000
+          Hint = '% de dividendo pago em relacao ao preco da o papel.'
+          Size.Width = 90.000000000000000000
+          Size.Height = 32.000000000000000000
+          Size.PlatformDefault = False
+          StyledSettings = [Family, Style, FontColor]
+          ParentShowHint = False
+          ShowHint = True
+        end
       end
-      object EditMargemSeguranca: TEdit
-        Touch.InteractiveGestures = [LongTap, DoubleTap]
-        TabOrder = 2
-        Text = '0'
-        Position.X = 446.000000000000000000
-        Position.Y = 113.000000000000000000
-        Hint = 'Divida liquida sobre o ebitida.'
-        Size.Width = 40.000000000000000000
-        Size.Height = 32.000000000000000000
+      object GridLayout2: TGridLayout
+        Align = Left
+        ItemHeight = 64.000000000000000000
+        ItemWidth = 64.000000000000000000
+        Orientation = Horizontal
+        Size.Width = 137.000000000000000000
+        Size.Height = 130.000000000000000000
         Size.PlatformDefault = False
-        ParentShowHint = False
-        ShowHint = True
+        TabOrder = 1
+        object Label7: TLabel
+          StyledSettings = [Family, Style, FontColor]
+          Size.Width = 64.000000000000000000
+          Size.Height = 64.000000000000000000
+          Size.PlatformDefault = False
+          TextSettings.Font.Size = 10.000000000000000000
+          TextSettings.HorzAlign = Trailing
+          Text = 'Papel'
+          TabOrder = 0
+        end
+        object EditPapel: TEdit
+          Touch.InteractiveGestures = [LongTap, DoubleTap]
+          TabOrder = 1
+          TextSettings.Font.Size = 10.000000000000000000
+          Position.X = 64.000000000000000000
+          Size.Width = 64.000000000000000000
+          Size.Height = 32.000000000000000000
+          Size.PlatformDefault = False
+          StyledSettings = [Family, Style, FontColor]
+          CharCase = ecUpperCase
+        end
+      end
+      object GridLayout3: TGridLayout
+        Align = Left
+        ItemHeight = 40.000000000000000000
+        ItemWidth = 55.000000000000000000
+        Orientation = Horizontal
+        Position.X = 537.000000000000000000
+        Size.Width = 232.000000000000000000
+        Size.Height = 130.000000000000000000
+        Size.PlatformDefault = False
+        TabOrder = 2
+        object Label3: TLabel
+          StyledSettings = [Family, Style, FontColor]
+          Size.Width = 55.000000000000000000
+          Size.Height = 40.000000000000000000
+          Size.PlatformDefault = False
+          TextSettings.Font.Size = 10.000000000000000000
+          TextSettings.HorzAlign = Trailing
+          Text = 'Faixa PL'
+          TabOrder = 0
+        end
+        object EditPLInicial: TEdit
+          Touch.InteractiveGestures = [LongTap, DoubleTap]
+          TabOrder = 1
+          Text = '-100'
+          TextSettings.Font.Size = 10.000000000000000000
+          Position.X = 55.000000000000000000
+          Size.Width = 55.000000000000000000
+          Size.Height = 32.000000000000000000
+          Size.PlatformDefault = False
+          StyledSettings = [Family, Style, FontColor]
+        end
+        object Label4: TLabel
+          StyledSettings = [Family, Style, FontColor]
+          Position.X = 110.000000000000000000
+          Size.Width = 55.000000000000000000
+          Size.Height = 40.000000000000000000
+          Size.PlatformDefault = False
+          TextSettings.Font.Size = 10.000000000000000000
+          TextSettings.HorzAlign = Center
+          Text = 'At'#233
+          TabOrder = 2
+        end
+        object EditPLFinal: TEdit
+          Touch.InteractiveGestures = [LongTap, DoubleTap]
+          TabOrder = 3
+          Text = '14'
+          TextSettings.Font.Size = 10.000000000000000000
+          Position.X = 165.000000000000000000
+          Size.Width = 55.000000000000000000
+          Size.Height = 32.000000000000000000
+          Size.PlatformDefault = False
+          StyledSettings = [Family, Style, FontColor]
+        end
+        object LabelBeta: TLabel
+          StyledSettings = [Family, Style, FontColor]
+          Position.Y = 40.000000000000000000
+          Size.Width = 55.000000000000000000
+          Size.Height = 40.000000000000000000
+          Size.PlatformDefault = False
+          TextSettings.Font.Size = 10.000000000000000000
+          TextSettings.HorzAlign = Trailing
+          Text = 'Beta >='
+          TabOrder = 4
+        end
+        object EditBetaInicial: TEdit
+          Touch.InteractiveGestures = [LongTap, DoubleTap]
+          TabOrder = 5
+          Text = '0'
+          TextSettings.Font.Size = 10.000000000000000000
+          Position.X = 55.000000000000000000
+          Position.Y = 40.000000000000000000
+          Size.Width = 55.000000000000000000
+          Size.Height = 32.000000000000000000
+          Size.PlatformDefault = False
+          StyledSettings = [Family, Style, FontColor]
+        end
+        object Label8: TLabel
+          StyledSettings = [Family, Style, FontColor]
+          Position.X = 110.000000000000000000
+          Position.Y = 40.000000000000000000
+          Size.Width = 55.000000000000000000
+          Size.Height = 40.000000000000000000
+          Size.PlatformDefault = False
+          TextSettings.Font.Size = 10.000000000000000000
+          TextSettings.HorzAlign = Center
+          Text = 'At'#233
+          TabOrder = 6
+        end
+        object EditBetaFinal: TEdit
+          Touch.InteractiveGestures = [LongTap, DoubleTap]
+          TabOrder = 7
+          Text = '9'
+          TextSettings.Font.Size = 10.000000000000000000
+          Position.X = 165.000000000000000000
+          Position.Y = 40.000000000000000000
+          Size.Width = 55.000000000000000000
+          Size.Height = 32.000000000000000000
+          Size.PlatformDefault = False
+          StyledSettings = [Family, Style, FontColor]
+        end
+      end
+      object GridLayout4: TGridLayout
+        Align = Left
+        ItemHeight = 64.000000000000000000
+        ItemWidth = 100.000000000000000000
+        Orientation = Horizontal
+        Position.X = 769.000000000000000000
+        Size.Width = 123.000000000000000000
+        Size.Height = 130.000000000000000000
+        Size.PlatformDefault = False
+        TabOrder = 3
+        object btnFiltrar: TSpeedButton
+          StyledSettings = [Family, FontColor]
+          Images = DataModule.ImageList1
+          ImageIndex = 5
+          Size.Width = 100.000000000000000000
+          Size.Height = 48.000000000000000000
+          Size.PlatformDefault = False
+          StyleLookup = 'SpeedButtonPersonalizado'
+          Text = 'Filtrar'
+          TextSettings.Font.Size = 10.000000000000000000
+          TextSettings.Font.StyleExt = {00070000000000000004000000}
+          OnClick = btnFiltrarClick
+        end
       end
     end
   end
@@ -296,8 +391,8 @@ object FormPrincipal: TFormPrincipal
     Margins.Top = 5.000000000000000000
     Margins.Right = 15.000000000000000000
     Position.X = 15.000000000000000000
-    Position.Y = 174.000000000000000000
-    Size.Width = 666.000000000000000000
+    Position.Y = 150.000000000000000000
+    Size.Width = 1132.000000000000000000
     Size.Height = 64.000000000000000000
     Size.PlatformDefault = False
     TabOrder = 4
@@ -309,8 +404,9 @@ object FormPrincipal: TFormPrincipal
       Margins.Left = 5.000000000000000000
       Margins.Right = 10.000000000000000000
       Position.X = 5.000000000000000000
+      Position.Y = 8.000000000000000000
       Size.Width = 161.000000000000000000
-      Size.Height = 64.000000000000000000
+      Size.Height = 48.000000000000000000
       Size.PlatformDefault = False
       StyleLookup = 'SpeedButtonPersonalizado'
       Text = 'Adicionar Papel'
@@ -326,8 +422,9 @@ object FormPrincipal: TFormPrincipal
       Margins.Left = 5.000000000000000000
       Margins.Right = 10.000000000000000000
       Position.X = 282.000000000000000000
+      Position.Y = 8.000000000000000000
       Size.Width = 158.000000000000000000
-      Size.Height = 64.000000000000000000
+      Size.Height = 48.000000000000000000
       Size.PlatformDefault = False
       StyleLookup = 'SpeedButtonPersonalizado'
       Text = 'Atualizar Dados'
@@ -341,9 +438,10 @@ object FormPrincipal: TFormPrincipal
       ImageIndex = 4
       Margins.Left = 10.000000000000000000
       Margins.Right = 2.000000000000000000
-      Position.X = 624.000000000000000000
+      Position.X = 1090.000000000000000000
+      Position.Y = 8.000000000000000000
       Size.Width = 40.000000000000000000
-      Size.Height = 64.000000000000000000
+      Size.Height = 48.000000000000000000
       Size.PlatformDefault = False
       StyleLookup = 'btnCloseStyle1'
       OnClick = btnCloseClick
@@ -356,8 +454,9 @@ object FormPrincipal: TFormPrincipal
       Margins.Left = 5.000000000000000000
       Margins.Right = 10.000000000000000000
       Position.X = 181.000000000000000000
+      Position.Y = 8.000000000000000000
       Size.Width = 86.000000000000000000
-      Size.Height = 64.000000000000000000
+      Size.Height = 48.000000000000000000
       Size.PlatformDefault = False
       StyleLookup = 'SpeedButtonPersonalizado'
       Text = 'Filtros'
@@ -385,7 +484,7 @@ object FormPrincipal: TFormPrincipal
         Margins.Right = 10.000000000000000000
         Margins.Bottom = 10.000000000000000000
         Size.Width = 139.000000000000000000
-        Size.Height = 39.000000000000000000
+        Size.Height = 32.000000000000000000
         Size.PlatformDefault = False
         TabOrder = 0
         OnChange = ComboBoxColunaChange
@@ -546,7 +645,7 @@ object FormPrincipal: TFormPrincipal
   object Label1: TLabel
     Align = Bottom
     Position.Y = 583.000000000000000000
-    Size.Width = 696.000000000000000000
+    Size.Width = 1162.000000000000000000
     Size.Height = 17.000000000000000000
     Size.PlatformDefault = False
     TabOrder = 11

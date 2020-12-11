@@ -4,107 +4,39 @@ inherited FormPrincipal_LgXhdpiPh: TFormPrincipal_LgXhdpiPh
   DesignerMasterStyle = 3
   inherited StringGrid1: TStringGrid
     Size.Width = 420.000000000000000000
-    Size.Height = 455.000000000000000000
+    Size.Height = 479.000000000000000000
     Viewport.Width = 420.000000000000000000
-    Viewport.Height = 455.000000000000000000
+    Viewport.Height = 479.000000000000000000
   end
   inherited PanelFiltros: TPanel
     Size.Width = 420.000000000000000000
     inherited GroupBox1: TGroupBox
       Size.Width = 420.000000000000000000
-      inherited EditBetaFinal: TEdit
-        Position.X = 216.000000000000000000
-      end
-      inherited EditBetaInicial: TEdit
-        Position.X = 134.000000000000000000
-      end
-      inherited EditDividaLiquidaEbitida: TEdit
-        Position.X = 401.000000000000000000
-      end
-      inherited EditPapel: TEdit
-        Position.X = 134.000000000000000000
-      end
-      inherited EditPercentualDividendo: TEdit
-        Position.X = 134.000000000000000000
-      end
-      inherited EditPLFinal: TEdit
-        Position.X = 216.000000000000000000
-      end
-      inherited EditPLInicial: TEdit
-        Position.X = 134.000000000000000000
-        Size.Width = 43.000000000000000000
-      end
-      inherited EditTagAlong: TEdit
-        Position.X = 401.000000000000000000
-      end
-      inherited Label2: TLabel
-        Position.X = 259.000000000000000000
-        Position.Y = 22.000000000000000000
-        Size.Width = 139.000000000000000000
-      end
-      inherited Label3: TLabel
-        Position.Y = 51.000000000000000000
-        Size.Width = 125.000000000000000000
-      end
-      inherited Label4: TLabel
-        Position.X = 181.000000000000000000
-        Position.Y = 58.000000000000000000
-      end
-      inherited Label5: TLabel
-        Position.Y = 111.000000000000000000
-        Size.Width = 125.000000000000000000
-      end
-      inherited Label6: TLabel
-        Position.X = 297.000000000000000000
-        Position.Y = 84.000000000000000000
-        Size.Width = 101.000000000000000000
-      end
-      inherited Label7: TLabel
-        Position.Y = 21.000000000000000000
-        Size.Width = 125.000000000000000000
-      end
-      inherited Label8: TLabel
-        Position.X = 180.000000000000000000
-        Size.Width = 29.000000000000000000
-      end
-      inherited LabelBeta: TLabel
-        Position.Y = 81.000000000000000000
-        Size.Width = 125.000000000000000000
-      end
-      inherited Label9: TLabel
-        Position.X = 259.000000000000000000
-        Position.Y = 53.000000000000000000
-        Size.Width = 139.000000000000000000
-      end
-      inherited EditDividendYield: TEdit
-        Position.X = 401.000000000000000000
-      end
-      inherited btnFiltrar: TSpeedButton
-        TextSettings.Font.StyleExt = {00070000000000000004000000}
+      inherited GridLayout4: TGridLayout
+        inherited btnFiltrar: TSpeedButton
+          TextSettings.Font.StyleExt = {00070000000000000004000000}
+        end
       end
     end
   end
   inherited PanelToolBar: TPanel
     Size.Width = 420.000000000000000000
     inherited SpeedButton2: TSpeedButton
-      Position.Y = 8.000000000000000000
-      Size.Height = 48.000000000000000000
       TextSettings.Font.StyleExt = {00070000000000000004000000}
     end
     inherited btnAtualizar: TSpeedButton
-      Position.Y = 8.000000000000000000
-      Size.Height = 48.000000000000000000
       TextSettings.Font.StyleExt = {00070000000000000004000000}
     end
     inherited SpeedButton4: TSpeedButton
       Position.X = 378.000000000000000000
-      Position.Y = 8.000000000000000000
-      Size.Height = 48.000000000000000000
     end
     inherited btnFiltros: TSpeedButton
-      Position.Y = 8.000000000000000000
-      Size.Height = 48.000000000000000000
       TextSettings.Font.StyleExt = {00070000000000000004000000}
+    end
+    inherited GroupBox2: TGroupBox
+      inherited ComboBoxColuna: TComboBox
+        Size.Height = 39.000000000000000000
+      end
     end
   end
   inherited Label1: TLabel
