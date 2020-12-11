@@ -12,8 +12,23 @@ inherited FormPrincipal_LgXhdpiPh: TFormPrincipal_LgXhdpiPh
     Size.Width = 420.000000000000000000
     inherited GroupBox1: TGroupBox
       Size.Width = 420.000000000000000000
+      inherited GridLayout3: TGridLayout
+        inherited EditPLInicial: TEdit
+          Size.Height = 40.000000000000000000
+        end
+        inherited EditPLFinal: TEdit
+          Size.Height = 40.000000000000000000
+        end
+        inherited EditBetaInicial: TEdit
+          Size.Height = 40.000000000000000000
+        end
+        inherited EditBetaFinal: TEdit
+          Size.Height = 40.000000000000000000
+        end
+      end
       inherited GridLayout4: TGridLayout
         inherited btnFiltrar: TSpeedButton
+          Size.Height = 64.000000000000000000
           TextSettings.Font.StyleExt = {00070000000000000004000000}
         end
       end

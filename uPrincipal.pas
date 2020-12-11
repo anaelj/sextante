@@ -430,6 +430,10 @@ begin
         pvOrderByFinal := 'order by VPA ';
       3:
         pvOrderByFinal := 'order by valor_beta desc';
+      4:
+        pvOrderByFinal := 'order by indicador_peter_lynch desc';
+      5:
+        pvOrderByFinal := 'order by bg_fator desc';
     end;
 
     DataModule.FDQueryPapelGrid.SQL.Text := format(sql_default_papel_cadastro, [pvFiltroFinal, pvOrderByFinal]);

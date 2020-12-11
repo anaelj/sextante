@@ -46,7 +46,6 @@ object FormPrincipal: TFormPrincipal
       Size.Width = 1132.000000000000000000
       Size.Height = 130.000000000000000000
       Size.PlatformDefault = False
-      Text = 'Filtros'
       TabOrder = 0
       object btnClose: TSpeedButton
         Anchors = [akTop, akRight]
@@ -478,7 +477,9 @@ object FormPrincipal: TFormPrincipal
           'Porcentagem Dividendo'
           'PL'
           'VPA'
-          'Beta')
+          'Beta'
+          'Peter Lynch'
+          'Margem Seguran'#231'a')
         Margins.Left = 10.000000000000000000
         Margins.Top = 15.000000000000000000
         Margins.Right = 10.000000000000000000
