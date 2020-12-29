@@ -8,7 +8,8 @@ uses
   uPopup in 'uPopup.pas' {FormPopup},
   Loading in '..\comum\Loading.pas',
   uFindInHtml in '..\comum\uFindInHtml.pas',
-  addPapel in 'addPapel.pas' {frmAddPapel};
+  addPapel in 'addPapel.pas' {frmAddPapel},
+  uRequestUrl in 'uRequestUrl.pas' {FormRequestUrl};
 
 {$R *.res}
 
@@ -20,6 +21,7 @@ begin
   Application.CreateForm(TFormPopup, FormPopup);
   Application.CreateForm(TFormPopup, FormPopup);
   Application.CreateForm(TfrmAddPapel, frmAddPapel);
+  Application.CreateForm(TFormRequestUrl, FormRequestUrl);
   Application.Run;
 end.
 

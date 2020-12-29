@@ -19,6 +19,7 @@ type
     Panel1: TPanel;
     Rectangle2: TRectangle;
     btnPeterLynch: TSpeedButton;
+    btnIncluirEmpresas: TSpeedButton;
     procedure btnPLDividaLiquidaClick(Sender: TObject);
     procedure btnBetaClick(Sender: TObject);
     procedure btnCotacaoClick(Sender: TObject);
@@ -27,6 +28,7 @@ type
     procedure btnCloseClick(Sender: TObject);
     procedure FormCreate(Sender: TObject);
     procedure btnPeterLynchClick(Sender: TObject);
+    procedure btnIncluirEmpresasClick(Sender: TObject);
   private
     { Private declarations }
     fCS: TCriticalSection;
@@ -51,7 +53,7 @@ begin
   TThread.CreateAnonymousThread(
     procedure
     begin
-      FormPrincipal.cargaPeterLynch (FormPrincipal.EditPapel.Text.Trim);
+      FormPrincipal.cargaPeterLynch(FormPrincipal.EditPapel.Text.Trim);
       TThread.Synchronize(nil,
         procedure
         begin
@@ -68,7 +70,7 @@ begin
   TThread.CreateAnonymousThread(
     procedure
     begin
-      FormPrincipal.cargaPLeDividaLiquida (FormPrincipal.EditPapel.Text.Trim);
+      FormPrincipal.cargaPLeDividaLiquida(FormPrincipal.EditPapel.Text.Trim);
       TThread.Synchronize(nil,
         procedure
         begin
@@ -112,8 +114,7 @@ begin
   close;
 
 
-//  TLoading.Show(FormPrincipal, 'Buscando dados...');
-
+  // TLoading.Show(FormPrincipal, 'Buscando dados...');
 
   TThread.CreateAnonymousThread(
     procedure
@@ -126,12 +127,10 @@ begin
       TThread.Synchronize(nil,
         procedure
         begin
-          FormPrincipal.StringGrid1.Visible := True;
+          FormPrincipal.StringGrid1.Visible := true;
           DataModule.FDQueryPapelGrid.Refresh;
         end);
     end).Start;
-
-
 
 end;
 
@@ -147,7 +146,7 @@ begin
   TThread.CreateAnonymousThread(
     procedure
     begin
-      FormPrincipal.cargaInicialDividendos (FormPrincipal.EditPapel.Text.Trim);
+      FormPrincipal.cargaInicialDividendos(FormPrincipal.EditPapel.Text.Trim);
       TThread.Synchronize(nil,
         procedure
         begin
@@ -157,6 +156,28 @@ begin
   close;
 end;
 
+procedure TFormPopup.btnIncluirEmpresasClick(Sender: TObject);
+begin
+  FormPrincipal.StringGrid1.Visible := false;
+
+  TThread.CreateAnonymousThread(
+    procedure
+    begin
+      FormPrincipal.addAllCompanies (url_indexes_smallcaps);
+      FormPrincipal.addAllCompanies (url_indexes_bovespa);
+
+      TThread.Synchronize(nil,
+        procedure
+        begin
+          FormPrincipal.StringGrid1.Visible := true;
+        end);
+
+    end).Start;
+
+  close;
+
+end;
+
 procedure TFormPopup.btnBetaClick(Sender: TObject);
 begin
   FormPrincipal.StringGrid1.Visible := false;
@@ -164,7 +185,7 @@ begin
   TThread.CreateAnonymousThread(
     procedure
     begin
-      FormPrincipal.cargaBeta (FormPrincipal.EditPapel.Text.Trim);
+      FormPrincipal.cargaBeta(FormPrincipal.EditPapel.Text.Trim);
 
       TThread.Synchronize(nil,
         procedure

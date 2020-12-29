@@ -145,7 +145,7 @@ object FormPopup: TFormPopup
       Margins.Right = 30.000000000000000000
       Margins.Bottom = 30.000000000000000000
       Size.Width = 392.000000000000000000
-      Size.Height = 378.000000000000000000
+      Size.Height = 395.000000000000000000
       Size.PlatformDefault = False
       Stroke.Kind = Resource
       object btnPLDividaLiquida: TSpeedButton
@@ -282,6 +282,25 @@ object FormPopup: TFormPopup
         TextSettings.Font.Size = 16.000000000000000000
         TextSettings.HorzAlign = Leading
         OnClick = btnPeterLynchClick
+      end
+      object btnIncluirEmpresas: TSpeedButton
+        Align = Top
+        StyledSettings = [Family, Style, FontColor]
+        Images = DataModule.ImageList1
+        ImageIndex = 3
+        Margins.Left = 20.000000000000000000
+        Margins.Top = 20.000000000000000000
+        Margins.Right = 20.000000000000000000
+        Position.X = 20.000000000000000000
+        Position.Y = 350.000000000000000000
+        Size.Width = 352.000000000000000000
+        Size.Height = 40.000000000000000000
+        Size.PlatformDefault = False
+        StyleLookup = 'SpeedButtonPersonalizado'
+        Text = '   Incluir Empresas (IBOV e SMLL)'
+        TextSettings.Font.Size = 16.000000000000000000
+        TextSettings.HorzAlign = Leading
+        OnClick = btnIncluirEmpresasClick
       end
     end
   end

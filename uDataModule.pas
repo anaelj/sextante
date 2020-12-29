@@ -79,6 +79,8 @@ const
   url_guiainvest = 'https://www.guiainvest.com.br/raiox/default.aspx?sigla=%s';
   url_dividendos_fundamentus = 'https://www.fundamentus.com.br/proventos.php?papel=%s&tipo=2';
   url_fundamentus = 'https://www.fundamentus.com.br/detalhes.php?papel=%s';
+  url_indexes_smallcaps = 'http://bvmf.bmfbovespa.com.br/indices/ResumoCarteiraTeorica.aspx?indice=SMLL';
+  url_indexes_bovespa = 'http://bvmf.bmfbovespa.com.br/indices/ResumoCarteiraTeorica.aspx?indice=IBOV';
 
   sql_default_papel_cadastro =
     'select * from papel where ((descricao = :descricao) OR (COALESCE(:descricao, '''') = '''')) %s %s';
@@ -90,6 +92,7 @@ const
   regExCotacaoYahoo = 'data-test="OPEN-value".*?\<\/';
   regExStatusInvest = '%s.+?\d\<\/';
   regExFundamentusCrescimento = '%s.+\n*.+\n*.+?<\/';
+  regExIndexsBMF = '%s\"\>\w*\d*\<';
 
 
 implementation

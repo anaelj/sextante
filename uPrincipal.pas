@@ -11,7 +11,8 @@ uses
   FMX.StdCtrls, FMX.Edit, FMX.ListBox, System.RegularExpressions, FireDAC.Stan.Intf, FireDAC.Stan.Option, FireDAC.Stan.Param,
   FireDAC.Stan.Error, FireDAC.DatS,
   FireDAC.Phys.Intf, FireDAC.DApt.Intf, FireDAC.Stan.Async, FireDAC.DApt, Data.DB, FireDAC.Comp.DataSet, FireDAC.Comp.Client,
-  FMX.Ani, IdBaseComponent, IdComponent, IdTCPConnection, IdTCPClient, IdHTTP, IdIOHandler, IdIOHandlerSocket, IdIOHandlerStack, IdSSL, IdSSLOpenSSL,
+  FMX.Ani, IdBaseComponent, IdComponent, IdTCPConnection, IdTCPClient, IdHTTP, IdIOHandler, IdIOHandlerSocket,
+  IdIOHandlerStack, IdSSL, IdSSLOpenSSL,
   System.Net.URLClient, System.Net.HttpClient, System.Net.HttpClientComponent, FMX.Layouts;
 
 type
@@ -93,6 +94,8 @@ type
     procedure cargaBeta(const pPapel: string = '');
     procedure cargaPLeDividaLiquida(const pPapel: string = '');
     procedure cargaPeterLynch(const pPapel: string = '');
+    procedure addAllCompanies(const url_Indexes: string);
+
   end;
 
 var
@@ -105,7 +108,74 @@ implementation
 {$R *.NmXhdpiPh.fmx ANDROID}
 
 
-uses uDataModule, uPopup, Loading, uFindInHtml, addPapel;
+uses uDataModule, uPopup, Loading, uFindInHtml, addPapel, uRequestUrl;
+
+procedure TFormPrincipal.addAllCompanies(const url_Indexes: string);
+var
+  queryLocal: TFDQuery;
+  htmlRetorno: TStrings;
+  vpa, lpa, valorIntriseco, margemSeguranca: Real;
+  labelLocal: TLabel;
+  companyName: string;
+begin
+
+  try
+    fCS.Enter;
+    queryLocal := TFDQuery.Create(self);
+    queryLocal.Connection := DataModule.FDConnection1;
+
+    queryLocal.SQL.Clear;
+    queryLocal.SQL.Add('select descricao from papel where upper(descricao) = :descricao');
+
+    labelLocal := criaLabel(150, FormPrincipal);
+    htmlRetorno := TStringList.Create;
+
+    labelLocal.Text := url_Indexes;
+
+    htmlRetorno.Clear;
+    htmlRetorno := TFindInHtml.downloadHTML('', url_Indexes);
+
+    if not htmlRetorno.Text.Contains('lblCodigo') then
+    begin
+      FormRequestUrl.RESTRequestUrl.Execute;
+      htmlRetorno.Text := FormRequestUrl.RESTResponseUrl.Content;
+    end;
+
+    if htmlRetorno.Text.Contains('lblCodigo') then
+    begin
+      companyName := TFindInHtml.getValueStrFromHTML(format(regExIndexsBMF, ['lblCodigo']),
+        htmlRetorno.Text);
+      while NOT companyName.IsEmpty do
+      begin
+        queryLocal.close;
+        queryLocal.ParamByName('descricao').AsString := companyName;
+        queryLocal.Open;
+        if queryLocal.IsEmpty then
+        begin
+          queryLocal.Insert;
+          queryLocal.FieldByName('DESCRICAO').AsString := companyName;
+          queryLocal.Post;
+        end;
+        htmlRetorno.Text := htmlRetorno.Text.Replace(format('lblCodigo">%s<', [companyName]), '');
+        companyName := TFindInHtml.getValueStrFromHTML(format(regExIndexsBMF, ['lblCodigo']),
+          htmlRetorno.Text);
+      end;
+    end;
+    FreeAndNil(htmlRetorno);
+    FreeAndNil(labelLocal);
+    FreeAndNil(queryLocal);
+    DataModule.FDQueryPapelGrid.Refresh;
+    fCS.Leave;
+  except
+    on E: Exception do
+    begin
+      htmlRetorno.Clear;
+      FreeAndNil(queryLocal);
+      FreeAndNil(htmlRetorno);
+      FreeAndNil(labelLocal);
+    end;
+  end;
+end;
 
 procedure TFormPrincipal.btnAtualizarClick(Sender: TObject);
 begin
@@ -114,7 +184,7 @@ end;
 
 procedure TFormPrincipal.btnCloseClick(Sender: TObject);
 begin
-  CLOSE;
+  close;
 end;
 
 procedure TFormPrincipal.btnFiltrosClick(Sender: TObject);
@@ -511,7 +581,7 @@ begin
   PanelFiltros.Visible := False;
   PanelToolBar.Visible := True;
 
-  DataModule.FDQueryPapelGrid.CLOSE;
+  DataModule.FDQueryPapelGrid.close;
   DataModule.FDQueryPapelGrid.ParamByName('descricao').AsString := '';
 
   if NOT EditPapel.Text.IsEmpty then
