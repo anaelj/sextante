@@ -60,9 +60,11 @@ type
     Label11: TLabel;
     EditPeterLynch: TEdit;
     GridLayout1: TGridLayout;
-    GridLayout2: TGridLayout;
     GridLayout3: TGridLayout;
     GridLayout4: TGridLayout;
+    Label12: TLabel;
+    ComboBoxGrupo: TComboBox;
+    FlowLayout1: TFlowLayout;
     procedure FormShow(Sender: TObject);
     procedure SpeedButton1Click(Sender: TObject);
     procedure btnCloseClick(Sender: TObject);
@@ -94,7 +96,7 @@ type
     procedure cargaBeta(const pPapel: string = '');
     procedure cargaPLeDividaLiquida(const pPapel: string = '');
     procedure cargaPeterLynch(const pPapel: string = '');
-    procedure addAllCompanies(const url_Indexes: string);
+    procedure addAllCompanies(const url_Indexes: string; const grupo: string = '');
 
   end;
 
@@ -110,7 +112,7 @@ implementation
 
 uses uDataModule, uPopup, Loading, uFindInHtml, addPapel, uRequestUrl;
 
-procedure TFormPrincipal.addAllCompanies(const url_Indexes: string);
+procedure TFormPrincipal.addAllCompanies(const url_Indexes: string; const grupo: string = '');
 var
   queryLocal: TFDQuery;
   htmlRetorno: TStrings;
@@ -125,7 +127,7 @@ begin
     queryLocal.Connection := DataModule.FDConnection1;
 
     queryLocal.SQL.Clear;
-    queryLocal.SQL.Add('select descricao from papel where upper(descricao) = :descricao');
+    queryLocal.SQL.Add('select descricao, grupo from papel where upper(descricao) = :descricao');
 
     labelLocal := criaLabel(150, FormPrincipal);
     htmlRetorno := TStringList.Create;
@@ -154,6 +156,14 @@ begin
         begin
           queryLocal.Insert;
           queryLocal.FieldByName('DESCRICAO').AsString := companyName;
+          queryLocal.FieldByName('grupo').AsString := grupo;
+          queryLocal.FieldByName('DESCRICAO').AsString := companyName;
+          queryLocal.Post;
+        end
+        else
+        begin
+          queryLocal.edit;
+          queryLocal.FieldByName('grupo').AsString := grupo;
           queryLocal.Post;
         end;
         htmlRetorno.Text := htmlRetorno.Text.Replace(format('lblCodigo">%s<', [companyName]), '');
@@ -440,7 +450,7 @@ begin
 
     queryLocal.SQL.Add
       (retornaConsultaSql
-      ('ID,DESCRICAO,PL,INDICADOR_PETER_LYNCH',
+      ('ID,DESCRICAO,CRESCIMENTO_5A,PL,INDICADOR_PETER_LYNCH',
       pPapel));
 
     queryLocal.Open;
@@ -460,10 +470,12 @@ begin
         crescimento := TFindInHtml.getValueFromHTML(format(regExFundamentusCrescimento, ['Cres\. Rec \(5a\)']),
           htmlRetorno.Text);
 
-        if (crescimento > 0) and (queryLocal.FieldByName('PL').Value > 0) then
+        if (crescimento > 0) then
         begin
           queryLocal.Edit;
-          queryLocal.FieldByName('INDICADOR_PETER_LYNCH').Value := queryLocal.FieldByName('PL').Value / crescimento;
+          queryLocal.FieldByName('CRESCIMENTO_5A').Value := crescimento;
+          if (queryLocal.FieldByName('PL').Value > 0) then
+            queryLocal.FieldByName('INDICADOR_PETER_LYNCH').Value := queryLocal.FieldByName('PL').Value / crescimento;
           queryLocal.Post;
         end;
       end;
@@ -504,6 +516,8 @@ begin
         pvOrderByFinal := 'order by indicador_peter_lynch desc';
       5:
         pvOrderByFinal := 'order by bg_fator desc';
+      6:
+        pvOrderByFinal := 'order by pontuacao desc';
     end;
 
     DataModule.FDQueryPapelGrid.SQL.Text := format(sql_default_papel_cadastro, [pvFiltroFinal, pvOrderByFinal]);
@@ -603,6 +617,8 @@ begin
       [makeEditValidFormatValue(EditBetaInicial, edtfmtReal), makeEditValidFormatValue(EditBetaFinal, edtfmtReal)]);
     pvFiltroFinal := pvFiltroFinal + format(' and (INDICADOR_PETER_LYNCH <= %s )',
       [makeEditValidFormatValue(EditPeterLynch, edtfmtReal)]);
+    pvFiltroFinal := pvFiltroFinal + format(' and (GRUPO = ''%s'' )',
+      [ComboBoxGrupo.Selected.Text]);
   end;
 
   DataModule.FDQueryPapelGrid.SQL.Text := format(sql_default_papel_cadastro, [pvFiltroFinal, pvOrderByFinal]);

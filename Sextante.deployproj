@@ -22,6 +22,15 @@
             <RemoteCommand/>
             <Overwrite>True</Overwrite>
         </DeployFile>
+        <DeployFile Include="database\dados_sextante.db" Condition="'$(Config)'=='Debug'">
+            <RemoteDir>Sextante\</RemoteDir>
+            <RemoteName>dados_sextante.db</RemoteName>
+            <DeployClass>ProjectFile</DeployClass>
+            <Operation>0</Operation>
+            <LocalCommand/>
+            <RemoteCommand/>
+            <Overwrite>True</Overwrite>
+        </DeployFile>
         <DeployFile Include="$(BDS)\bin\Artwork\Windows\UWP\delphi_UwpDefault_44.png" Condition="'$(Config)'=='Release'">
             <RemoteDir>Sextante\Assets\</RemoteDir>
             <RemoteName>Logo44x44.png</RemoteName>
@@ -30,6 +39,16 @@
             <LocalCommand/>
             <RemoteCommand/>
             <Overwrite>True</Overwrite>
+        </DeployFile>
+        <DeployFile Include="executaveis\Sextante.exe" Condition="'$(Config)'=='Debug'">
+            <RemoteDir>Sextante\</RemoteDir>
+            <RemoteName>Sextante.exe</RemoteName>
+            <DeployClass>ProjectOutput</DeployClass>
+            <Operation>0</Operation>
+            <LocalCommand/>
+            <RemoteCommand/>
+            <Overwrite>True</Overwrite>
+            <Required>True</Required>
         </DeployFile>
         <DeployFile Include="$(BDS)\bin\Artwork\Windows\UWP\delphi_UwpDefault_44.png" Condition="'$(Config)'=='Debug'">
             <RemoteDir>Sextante\Assets\</RemoteDir>
@@ -90,6 +109,15 @@
             <RemoteCommand/>
             <Overwrite>True</Overwrite>
         </DeployFile>
+        <DeployFile Include="executaveis\classes.dex" Condition="'$(Config)'=='Release'">
+            <RemoteDir>Sextante\classes\</RemoteDir>
+            <RemoteName>classes.dex</RemoteName>
+            <DeployClass>AndroidClassesDexFile</DeployClass>
+            <Operation>1</Operation>
+            <LocalCommand/>
+            <RemoteCommand/>
+            <Overwrite>True</Overwrite>
+        </DeployFile>
         <DeployFile Include="$(BDS)\bin\Artwork\Android\FM_NotificationIcon_24x24.png" Condition="'$(Config)'=='Release'">
             <RemoteDir>Sextante\res\drawable-mdpi\</RemoteDir>
             <RemoteName>ic_notification.png</RemoteName>
@@ -108,15 +136,6 @@
             <RemoteCommand/>
             <Overwrite>True</Overwrite>
             <Required>True</Required>
-        </DeployFile>
-        <DeployFile Include="executaveis\classes.dex" Condition="'$(Config)'=='Release'">
-            <RemoteDir>Sextante\classes\</RemoteDir>
-            <RemoteName>classes.dex</RemoteName>
-            <DeployClass>AndroidClassesDexFile</DeployClass>
-            <Operation>1</Operation>
-            <LocalCommand/>
-            <RemoteCommand/>
-            <Overwrite>True</Overwrite>
         </DeployFile>
         <DeployFile Include="$(BDS)\bin\Artwork\Android\FM_LauncherIcon_72x72.png" Condition="'$(Config)'=='Debug'">
             <RemoteDir>Sextante\res\drawable-hdpi\</RemoteDir>

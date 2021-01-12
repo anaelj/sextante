@@ -54,6 +54,17 @@ type
     FDQueryPapelGridTAG_ALONG: TBCDField;
     FDQueryPapelGridDIVIDEND_YIELD: TBCDField;
     FDQueryPapelGridINDICADOR_PETER_LYNCH: TBCDField;
+    FDQueryPapelGridCRESCIMENTO_5A: TBCDField;
+    FDQueryPapelGridPONTUACAO: TBCDField;
+    FDQueryPapelGridGRUPO: TStringField;
+    FDQueryPontuacao: TFDQuery;
+    FDQueryPontuacaoID: TIntegerField;
+    FDQueryPontuacaopontos_cotacao: TLargeintField;
+    FDQueryPontuacaopontos_vpa: TFloatField;
+    FDQueryPontuacaopontos_pl: TFloatField;
+    FDQueryPontuacaopontos_dividendos: TFloatField;
+    FDQueryPontuacaopontos_divida: TFloatField;
+    FDQueryPontuacaopontos_crescimento: TLargeintField;
     procedure FormCreate(Sender: TObject);
   private
     procedure criaCampoBanco(pTabela, pCampo, pTipo, pValorDefault: String);
@@ -134,6 +145,9 @@ begin
   FDConnection1.Connected := True;
 
   criaCampoBanco('PAPEL', 'INDICADOR_PETER_LYNCH', 'NUMERIC(15,2)', '0'); // PL / CRESCIMENTO, QUANDO MENOR MELHOR
+  criaCampoBanco('PAPEL', 'CRESCIMENTO_5A', 'NUMERIC(15,2)', '0');
+  criaCampoBanco('PAPEL', 'PONTUACAO', 'NUMERIC(15,2)', '0');
+  criaCampoBanco('PAPEL', 'GRUPO', 'VARCHAR(50)','');
   // FDConnection1.Connected := false;
   // FDConnection1.Connected := True;
 

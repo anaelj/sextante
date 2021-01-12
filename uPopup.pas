@@ -4,7 +4,8 @@ interface
 
 uses
   System.SysUtils, System.Types, System.UITypes, System.Classes, System.Variants, syncObjs,
-  FMX.Types, FMX.Controls, FMX.Forms, FMX.Graphics, FMX.Dialogs, FMX.Objects, FMX.Controls.Presentation, FMX.StdCtrls;
+  FMX.Types, FMX.Controls, FMX.Forms, FMX.Graphics, FMX.Dialogs, FMX.Objects, FMX.Controls.Presentation, FMX.StdCtrls,
+  FMX.Layouts;
 
 type
   TFormPopup = class(TForm)
@@ -20,6 +21,8 @@ type
     Rectangle2: TRectangle;
     btnPeterLynch: TSpeedButton;
     btnIncluirEmpresas: TSpeedButton;
+    ScrollBox1: TScrollBox;
+    SpeedButtonCalculaPontuacao: TSpeedButton;
     procedure btnPLDividaLiquidaClick(Sender: TObject);
     procedure btnBetaClick(Sender: TObject);
     procedure btnCotacaoClick(Sender: TObject);
@@ -29,6 +32,7 @@ type
     procedure FormCreate(Sender: TObject);
     procedure btnPeterLynchClick(Sender: TObject);
     procedure btnIncluirEmpresasClick(Sender: TObject);
+    procedure SpeedButtonCalculaPontuacaoClick(Sender: TObject);
   private
     { Private declarations }
     fCS: TCriticalSection;
@@ -54,7 +58,7 @@ begin
     procedure
     begin
       FormPrincipal.cargaPeterLynch(FormPrincipal.EditPapel.Text.Trim);
-      TThread.Synchronize(nil,
+      TThread.Synchronize(TThread.CurrentThread,
         procedure
         begin
           FormPrincipal.StringGrid1.Visible := true;
@@ -71,7 +75,7 @@ begin
     procedure
     begin
       FormPrincipal.cargaPLeDividaLiquida(FormPrincipal.EditPapel.Text.Trim);
-      TThread.Synchronize(nil,
+      TThread.Synchronize(TThread.CurrentThread,
         procedure
         begin
           FormPrincipal.StringGrid1.Visible := true;
@@ -98,7 +102,7 @@ begin
       except
       end;
 
-      TThread.Synchronize(nil,
+      TThread.Synchronize(TThread.CurrentThread,
         procedure
         begin
           FormPrincipal.StringGrid1.Visible := true;
@@ -124,7 +128,7 @@ begin
       FormPrincipal.cargaBeta;
       FormPrincipal.cargaPLeDividaLiquida;
 
-      TThread.Synchronize(nil,
+      TThread.Synchronize(TThread.CurrentThread,
         procedure
         begin
           FormPrincipal.StringGrid1.Visible := true;
@@ -140,6 +144,44 @@ begin
 
 end;
 
+procedure TFormPopup.SpeedButtonCalculaPontuacaoClick(Sender: TObject);
+var sql : string;
+begin
+
+
+
+  FormPrincipal.StringGrid1.Visible := false;
+  TThread.CreateAnonymousThread(
+    procedure
+    begin
+      with DataModule do
+      begin
+        FDQueryPontuacao.Open;
+        FDQueryPontuacao.First;
+        while not FDQueryPontuacao.Eof do
+        begin
+          sql := format('update papel set pontuacao = %s where id = %d', [
+            FloatToStrF (FDQueryPontuacaopontos_cotacao.AsFloat +
+            FDQueryPontuacaopontos_vpa.AsFloat +
+            FDQueryPontuacaopontos_pl.AsFloat +
+            FDQueryPontuacaopontos_dividendos.AsFloat +
+            FDQueryPontuacaopontos_divida.AsFloat +
+            FDQueryPontuacaopontos_crescimento.AsFloat, ffFixed, 8,4).Replace(',','.')
+            , FDQueryPontuacaoID.AsInteger]);
+          FDConnection1.ExecSQL(sql);
+          FDQueryPontuacao.Next;
+        end;
+      end;
+      TThread.Synchronize(TThread.CurrentThread,
+        procedure
+        begin
+          FormPrincipal.StringGrid1.Visible := true;
+        end);
+    end).Start;
+  close;
+
+end;
+
 procedure TFormPopup.btnDividendosClick(Sender: TObject);
 begin
   FormPrincipal.StringGrid1.Visible := false;
@@ -147,7 +189,7 @@ begin
     procedure
     begin
       FormPrincipal.cargaInicialDividendos(FormPrincipal.EditPapel.Text.Trim);
-      TThread.Synchronize(nil,
+      TThread.Synchronize(TThread.CurrentThread,
         procedure
         begin
           FormPrincipal.StringGrid1.Visible := true;
@@ -163,10 +205,10 @@ begin
   TThread.CreateAnonymousThread(
     procedure
     begin
-      FormPrincipal.addAllCompanies (url_indexes_smallcaps);
-      FormPrincipal.addAllCompanies (url_indexes_bovespa);
+      FormPrincipal.addAllCompanies(url_indexes_smallcaps, 'INDICE_SMALLCAPS');
+      FormPrincipal.addAllCompanies(url_indexes_bovespa, 'INDICE_BOVESPA');
 
-      TThread.Synchronize(nil,
+      TThread.Synchronize(TThread.CurrentThread,
         procedure
         begin
           FormPrincipal.StringGrid1.Visible := true;
@@ -187,7 +229,7 @@ begin
     begin
       FormPrincipal.cargaBeta(FormPrincipal.EditPapel.Text.Trim);
 
-      TThread.Synchronize(nil,
+      TThread.Synchronize(TThread.CurrentThread,
         procedure
         begin
           FormPrincipal.StringGrid1.Visible := true;

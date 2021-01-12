@@ -13,56 +13,54 @@ inherited FormPrincipal_NmXhdpiPh: TFormPrincipal_NmXhdpiPh
     inherited GroupBox1: TGroupBox
       Size.Width = 370.000000000000000000
       inherited GridLayout1: TGridLayout
+        inherited EditMargemSeguranca: TEdit
+          Size.Height = 32.000000000000000000
+        end
         inherited EditPeterLynch: TEdit
-          Size.Height = 40.000000000000000000
+          Size.Height = 32.000000000000000000
+        end
+        inherited EditTagAlong: TEdit
+          Size.Height = 32.000000000000000000
         end
         inherited EditDividendYield: TEdit
-          Size.Height = 40.000000000000000000
+          Size.Height = 32.000000000000000000
+        end
+        inherited EditDividaLiquidaEbitida: TEdit
+          Size.Height = 32.000000000000000000
         end
         inherited EditPercentualDividendo: TEdit
-          Size.Height = 40.000000000000000000
-        end
-      end
-      inherited GridLayout3: TGridLayout
-        inherited EditPLInicial: TEdit
-          Size.Height = 40.000000000000000000
-        end
-        inherited EditPLFinal: TEdit
-          Size.Height = 40.000000000000000000
-        end
-        inherited EditBetaInicial: TEdit
-          Size.Height = 40.000000000000000000
-        end
-        inherited EditBetaFinal: TEdit
-          Size.Height = 40.000000000000000000
+          Size.Height = 32.000000000000000000
         end
       end
       inherited GridLayout4: TGridLayout
         inherited btnFiltrar: TSpeedButton
-          Size.Height = 64.000000000000000000
           TextSettings.Font.StyleExt = {00070000000000000004000000}
         end
+      end
+      inherited FlowLayout1: TFlowLayout
+        Position.X = 632.000000000000000000
       end
     end
   end
   inherited PanelToolBar: TPanel
     Size.Width = 370.000000000000000000
     inherited SpeedButton2: TSpeedButton
+      Position.Y = 8.000000000000000000
+      Size.Height = 48.000000000000000000
       TextSettings.Font.StyleExt = {00070000000000000004000000}
     end
     inherited btnAtualizar: TSpeedButton
+      Position.Y = 8.000000000000000000
+      Size.Height = 48.000000000000000000
       TextSettings.Font.StyleExt = {00070000000000000004000000}
     end
     inherited SpeedButton4: TSpeedButton
       Position.X = 328.000000000000000000
     end
     inherited btnFiltros: TSpeedButton
+      Position.Y = 8.000000000000000000
+      Size.Height = 48.000000000000000000
       TextSettings.Font.StyleExt = {00070000000000000004000000}
-    end
-    inherited GroupBox2: TGroupBox
-      inherited ComboBoxColuna: TComboBox
-        Size.Height = 39.000000000000000000
-      end
     end
   end
   inherited Label1: TLabel

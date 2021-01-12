@@ -13,7 +13,7 @@ object FormPrincipal: TFormPrincipal
   FormFactor.Devices = [Desktop]
   OnCreate = FormCreate
   OnShow = FormShow
-  DesignerMasterStyle = 3
+  DesignerMasterStyle = 0
   object StringGrid1: TStringGrid
     Align = Client
     CanFocus = True
@@ -26,8 +26,8 @@ object FormPrincipal: TFormPrincipal
     Size.Height = 359.000000000000000000
     Size.PlatformDefault = False
     TabOrder = 1
-    Viewport.Width = 1132.000000000000000000
-    Viewport.Height = 359.000000000000000000
+    Viewport.Width = 1112.000000000000000000
+    Viewport.Height = 318.000000000000000000
   end
   object PanelFiltros: TPanel
     Align = Top
@@ -43,8 +43,9 @@ object FormPrincipal: TFormPrincipal
     TabOrder = 0
     object GroupBox1: TGroupBox
       Align = Client
+      Margins.Top = 10.000000000000000000
       Size.Width = 1132.000000000000000000
-      Size.Height = 130.000000000000000000
+      Size.Height = 120.000000000000000000
       Size.PlatformDefault = False
       TabOrder = 0
       object btnClose: TSpeedButton
@@ -65,9 +66,9 @@ object FormPrincipal: TFormPrincipal
         ItemWidth = 90.000000000000000000
         Orientation = Horizontal
         Margins.Left = 20.000000000000000000
-        Position.X = 157.000000000000000000
+        Position.X = 205.000000000000000000
         Size.Width = 380.000000000000000000
-        Size.Height = 130.000000000000000000
+        Size.Height = 120.000000000000000000
         Size.PlatformDefault = False
         TabOrder = 0
         object Label10: TLabel
@@ -88,7 +89,7 @@ object FormPrincipal: TFormPrincipal
           Position.X = 90.000000000000000000
           Hint = 'Divida liquida sobre o ebitida.'
           Size.Width = 90.000000000000000000
-          Size.Height = 32.000000000000000000
+          Size.Height = 40.000000000000000000
           Size.PlatformDefault = False
           StyledSettings = [Family, Style, FontColor]
           ParentShowHint = False
@@ -113,7 +114,7 @@ object FormPrincipal: TFormPrincipal
           Position.X = 270.000000000000000000
           Hint = 'Divida liquida sobre o ebitida.'
           Size.Width = 90.000000000000000000
-          Size.Height = 32.000000000000000000
+          Size.Height = 40.000000000000000000
           Size.PlatformDefault = False
           StyledSettings = [Family, Style, FontColor]
           ParentShowHint = False
@@ -139,7 +140,7 @@ object FormPrincipal: TFormPrincipal
           Position.Y = 40.000000000000000000
           Hint = 'Divida liquida sobre o ebitida.'
           Size.Width = 90.000000000000000000
-          Size.Height = 32.000000000000000000
+          Size.Height = 40.000000000000000000
           Size.PlatformDefault = False
           StyledSettings = [Family, Style, FontColor]
           ParentShowHint = False
@@ -166,7 +167,7 @@ object FormPrincipal: TFormPrincipal
           Position.Y = 40.000000000000000000
           Hint = 'Divida liquida sobre o ebitida.'
           Size.Width = 90.000000000000000000
-          Size.Height = 32.000000000000000000
+          Size.Height = 40.000000000000000000
           Size.PlatformDefault = False
           StyledSettings = [Family, Style, FontColor]
           ParentShowHint = False
@@ -192,7 +193,7 @@ object FormPrincipal: TFormPrincipal
           Position.Y = 80.000000000000000000
           Hint = 'Divida liquida sobre o ebitida.'
           Size.Width = 90.000000000000000000
-          Size.Height = 32.000000000000000000
+          Size.Height = 40.000000000000000000
           Size.PlatformDefault = False
           StyledSettings = [Family, Style, FontColor]
           ParentShowHint = False
@@ -219,42 +220,11 @@ object FormPrincipal: TFormPrincipal
           Position.Y = 80.000000000000000000
           Hint = '% de dividendo pago em relacao ao preco da o papel.'
           Size.Width = 90.000000000000000000
-          Size.Height = 32.000000000000000000
+          Size.Height = 40.000000000000000000
           Size.PlatformDefault = False
           StyledSettings = [Family, Style, FontColor]
           ParentShowHint = False
           ShowHint = True
-        end
-      end
-      object GridLayout2: TGridLayout
-        Align = Left
-        ItemHeight = 64.000000000000000000
-        ItemWidth = 64.000000000000000000
-        Orientation = Horizontal
-        Size.Width = 137.000000000000000000
-        Size.Height = 130.000000000000000000
-        Size.PlatformDefault = False
-        TabOrder = 1
-        object Label7: TLabel
-          StyledSettings = [Family, Style, FontColor]
-          Size.Width = 64.000000000000000000
-          Size.Height = 64.000000000000000000
-          Size.PlatformDefault = False
-          TextSettings.Font.Size = 10.000000000000000000
-          TextSettings.HorzAlign = Trailing
-          Text = 'Papel'
-          TabOrder = 0
-        end
-        object EditPapel: TEdit
-          Touch.InteractiveGestures = [LongTap, DoubleTap]
-          TabOrder = 1
-          TextSettings.Font.Size = 10.000000000000000000
-          Position.X = 64.000000000000000000
-          Size.Width = 64.000000000000000000
-          Size.Height = 32.000000000000000000
-          Size.PlatformDefault = False
-          StyledSettings = [Family, Style, FontColor]
-          CharCase = ecUpperCase
         end
       end
       object GridLayout3: TGridLayout
@@ -262,11 +232,11 @@ object FormPrincipal: TFormPrincipal
         ItemHeight = 40.000000000000000000
         ItemWidth = 55.000000000000000000
         Orientation = Horizontal
-        Position.X = 537.000000000000000000
+        Position.X = 585.000000000000000000
         Size.Width = 232.000000000000000000
-        Size.Height = 130.000000000000000000
+        Size.Height = 120.000000000000000000
         Size.PlatformDefault = False
-        TabOrder = 2
+        TabOrder = 1
         object Label3: TLabel
           StyledSettings = [Family, Style, FontColor]
           Size.Width = 55.000000000000000000
@@ -284,7 +254,7 @@ object FormPrincipal: TFormPrincipal
           TextSettings.Font.Size = 10.000000000000000000
           Position.X = 55.000000000000000000
           Size.Width = 55.000000000000000000
-          Size.Height = 32.000000000000000000
+          Size.Height = 40.000000000000000000
           Size.PlatformDefault = False
           StyledSettings = [Family, Style, FontColor]
         end
@@ -306,7 +276,7 @@ object FormPrincipal: TFormPrincipal
           TextSettings.Font.Size = 10.000000000000000000
           Position.X = 165.000000000000000000
           Size.Width = 55.000000000000000000
-          Size.Height = 32.000000000000000000
+          Size.Height = 40.000000000000000000
           Size.PlatformDefault = False
           StyledSettings = [Family, Style, FontColor]
         end
@@ -329,7 +299,7 @@ object FormPrincipal: TFormPrincipal
           Position.X = 55.000000000000000000
           Position.Y = 40.000000000000000000
           Size.Width = 55.000000000000000000
-          Size.Height = 32.000000000000000000
+          Size.Height = 40.000000000000000000
           Size.PlatformDefault = False
           StyledSettings = [Family, Style, FontColor]
         end
@@ -353,7 +323,7 @@ object FormPrincipal: TFormPrincipal
           Position.X = 165.000000000000000000
           Position.Y = 40.000000000000000000
           Size.Width = 55.000000000000000000
-          Size.Height = 32.000000000000000000
+          Size.Height = 40.000000000000000000
           Size.PlatformDefault = False
           StyledSettings = [Family, Style, FontColor]
         end
@@ -363,23 +333,85 @@ object FormPrincipal: TFormPrincipal
         ItemHeight = 64.000000000000000000
         ItemWidth = 100.000000000000000000
         Orientation = Horizontal
-        Position.X = 769.000000000000000000
+        Position.X = 817.000000000000000000
         Size.Width = 123.000000000000000000
-        Size.Height = 130.000000000000000000
+        Size.Height = 120.000000000000000000
         Size.PlatformDefault = False
-        TabOrder = 3
+        TabOrder = 2
         object btnFiltrar: TSpeedButton
           StyledSettings = [Family, FontColor]
           Images = DataModule.ImageList1
           ImageIndex = 5
           Size.Width = 100.000000000000000000
-          Size.Height = 48.000000000000000000
+          Size.Height = 64.000000000000000000
           Size.PlatformDefault = False
           StyleLookup = 'SpeedButtonPersonalizado'
           Text = 'Filtrar'
           TextSettings.Font.Size = 10.000000000000000000
           TextSettings.Font.StyleExt = {00070000000000000004000000}
           OnClick = btnFiltrarClick
+        end
+      end
+      object FlowLayout1: TFlowLayout
+        Align = Left
+        Size.Width = 185.000000000000000000
+        Size.Height = 120.000000000000000000
+        Size.PlatformDefault = False
+        TabOrder = 3
+        Justify = Left
+        JustifyLastLine = Left
+        FlowDirection = LeftToRight
+        object Label7: TLabel
+          StyledSettings = [Family, Style, FontColor]
+          Margins.Top = 10.000000000000000000
+          Position.Y = 10.000000000000000000
+          Size.Width = 60.000000000000000000
+          Size.Height = 30.000000000000000000
+          Size.PlatformDefault = False
+          TextSettings.Font.Size = 10.000000000000000000
+          TextSettings.HorzAlign = Trailing
+          Text = 'Papel'
+          TabOrder = 0
+        end
+        object EditPapel: TEdit
+          Touch.InteractiveGestures = [LongTap, DoubleTap]
+          TabOrder = 1
+          TextSettings.Font.Size = 10.000000000000000000
+          Position.X = 60.000000000000000000
+          Position.Y = 10.000000000000000000
+          Margins.Top = 10.000000000000000000
+          Size.Width = 70.000000000000000000
+          Size.Height = 32.000000000000000000
+          Size.PlatformDefault = False
+          StyledSettings = [Family, Style, FontColor]
+          CharCase = ecUpperCase
+        end
+        object Label12: TLabel
+          StyledSettings = [Family, Style, FontColor]
+          Position.Y = 42.000000000000000000
+          Size.Width = 60.000000000000000000
+          Size.Height = 40.000000000000000000
+          Size.PlatformDefault = False
+          TextSettings.Font.Size = 10.000000000000000000
+          TextSettings.HorzAlign = Trailing
+          Text = 'Grupo'
+          TabOrder = 2
+        end
+        object ComboBoxGrupo: TComboBox
+          Align = Client
+          Items.Strings = (
+            ''
+            'INDICE_BOVESPA'
+            'INDICE_SMALLCAPS')
+          Margins.Left = 10.000000000000000000
+          Margins.Top = 15.000000000000000000
+          Margins.Right = 10.000000000000000000
+          Margins.Bottom = 10.000000000000000000
+          Size.Width = 100.000000000000000000
+          Size.Height = 32.000000000000000000
+          Size.PlatformDefault = False
+          TabOrder = 3
+          OnChange = ComboBoxColunaChange
         end
       end
     end
@@ -403,9 +435,8 @@ object FormPrincipal: TFormPrincipal
       Margins.Left = 5.000000000000000000
       Margins.Right = 10.000000000000000000
       Position.X = 5.000000000000000000
-      Position.Y = 8.000000000000000000
       Size.Width = 161.000000000000000000
-      Size.Height = 48.000000000000000000
+      Size.Height = 64.000000000000000000
       Size.PlatformDefault = False
       StyleLookup = 'SpeedButtonPersonalizado'
       Text = 'Adicionar Papel'
@@ -421,9 +452,8 @@ object FormPrincipal: TFormPrincipal
       Margins.Left = 5.000000000000000000
       Margins.Right = 10.000000000000000000
       Position.X = 282.000000000000000000
-      Position.Y = 8.000000000000000000
       Size.Width = 158.000000000000000000
-      Size.Height = 48.000000000000000000
+      Size.Height = 64.000000000000000000
       Size.PlatformDefault = False
       StyleLookup = 'SpeedButtonPersonalizado'
       Text = 'Atualizar Dados'
@@ -438,9 +468,8 @@ object FormPrincipal: TFormPrincipal
       Margins.Left = 10.000000000000000000
       Margins.Right = 2.000000000000000000
       Position.X = 1090.000000000000000000
-      Position.Y = 8.000000000000000000
       Size.Width = 40.000000000000000000
-      Size.Height = 48.000000000000000000
+      Size.Height = 64.000000000000000000
       Size.PlatformDefault = False
       StyleLookup = 'btnCloseStyle1'
       OnClick = btnCloseClick
@@ -453,9 +482,8 @@ object FormPrincipal: TFormPrincipal
       Margins.Left = 5.000000000000000000
       Margins.Right = 10.000000000000000000
       Position.X = 181.000000000000000000
-      Position.Y = 8.000000000000000000
       Size.Width = 86.000000000000000000
-      Size.Height = 48.000000000000000000
+      Size.Height = 64.000000000000000000
       Size.PlatformDefault = False
       StyleLookup = 'SpeedButtonPersonalizado'
       Text = 'Filtros'
@@ -479,13 +507,14 @@ object FormPrincipal: TFormPrincipal
           'VPA'
           'Beta'
           'Peter Lynch'
-          'Margem Seguran'#231'a')
+          'Margem Seguran'#231'a'
+          'Pontuacao')
         Margins.Left = 10.000000000000000000
         Margins.Top = 15.000000000000000000
         Margins.Right = 10.000000000000000000
         Margins.Bottom = 10.000000000000000000
         Size.Width = 139.000000000000000000
-        Size.Height = 32.000000000000000000
+        Size.Height = 39.000000000000000000
         Size.PlatformDefault = False
         TabOrder = 0
         OnChange = ComboBoxColunaChange
@@ -750,6 +779,14 @@ object FormPrincipal: TFormPrincipal
         item
           MemberName = 'INDICADOR_PETER_LYNCH'
           Header = 'Ind. P. Lynch'
+        end
+        item
+          MemberName = 'PONTUACAO'
+          Header = 'Pontua'#231#227'o'
+        end
+        item
+          MemberName = 'CRESCIMENTO_5A'
+          Header = 'Cres.5anos'
         end>
     end
   end
